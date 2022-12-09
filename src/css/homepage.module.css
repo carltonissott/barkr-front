@@ -1,0 +1,29 @@
+.homepagebuttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem;
+}
+
+.link{
+  width: 100%;
+  margin: 3rem;
+}
+
+.button {
+  font-size: 3rem;
+  width: 100%;
+  border: 0;
+  padding: 0.5em;
+  border-radius: 20px;
+  background-color: #e76f51;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.button:hover {
+  background-color: #f4a261;
+  transform: translateY(-20px);
+}
