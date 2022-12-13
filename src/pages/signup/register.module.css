@@ -8,6 +8,14 @@ form h1 {
   color: #220700;
 }
 
+#loading {
+  display: flex;
+  align-items: center;
+
+  width: 6rem;
+  height: 6rem;
+}
+
 form input {
   margin: 10px 0;
   border-radius: 5px;
@@ -16,6 +24,15 @@ form input {
   font-size: 1.5rem;
   padding-left: 0.5rem;
 }
+
+.invalid {
+  border: 0.2px solid red;
+}
+.invalid:focus {
+  outline: red solid 0.2px;
+  border: 0.2px solid red;
+}
+
 form label {
   font-size: 1.5rem;
 }
@@ -32,5 +49,5 @@ form label {
 }
 
 .button:hover {
-    background-color: #f4a261;
-  }
+  background-color: #f4a261;
+}

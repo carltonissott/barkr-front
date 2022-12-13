@@ -1,0 +1,23 @@
+.card {
+  background-color: white;
+  display: grid;
+  align-items: center;
+  border-radius: 20px;
+  grid-template-columns: 1fr 5fr .5fr;
+  margin: 1rem;
+}
+.petName {
+  font-size: 3rem;
+}
+.petavatar {
+  margin: 15px;
+  width: 6em;
+  height: 6em;
+  object-fit: cover;
+  border-radius: 50px;
+}
+.hamburger {
+  width: 3em;
+  height: 3em;
+  margin: 15px;
+}

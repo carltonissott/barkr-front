@@ -1,0 +1,25 @@
+.radiobuttons {
+  width: 100%;
+  display: flex;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  font-size: 2rem;
+  border: 0;
+  margin: 1rem 0;
+  padding: 0.2em 2em;
+  border-radius: 20px;
+  background-color: #e76f51;
+  color: white;
+  transition: transform 0.3s;
+
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #f4a261;
+}
