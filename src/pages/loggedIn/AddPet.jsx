@@ -16,24 +16,27 @@ const AddPet = () => {
       type = "other";
     }
 
-    const formData =  new FormData();
-    console.log(e.target[4].value)
-    console.log(e)
+    const formData = new FormData();
+    console.log(e.target[4].value);
+    console.log(e);
     formData.append("image", e.target[4].files[0]);
-    await fetch("http://localhost:8080/post-image", {
+    const imageUrl = await fetch("http://localhost:8080/post-image", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: formData,
     });
-
-    const graphqlQuery = await {
+    const decoded = await imageUrl.json();
+    const image = await decoded.filePath.replace(/\\/g, "/");
+    console.log(`"${image}"`)
+    const graphqlQuery = {
       query: `
         mutation{
             createPet(petInput:{
                 name: "${e.target[3].value}"
                 phone:"${e.target[6].value}"
+                image: "${image}"
                 type: "${type}"
             }){
                 breed

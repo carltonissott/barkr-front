@@ -45,6 +45,7 @@ const Dashboard = (props) => {
         query: `
                     {pet(id:"${element._id}")
                           {name
+                            image
                         }  
                       }
                     `,
@@ -78,8 +79,13 @@ const Dashboard = (props) => {
       <div className={dashboard.main}>
         <h1>Welcome, {user} </h1>
         <h2>Your pets:</h2>
-        {petArray.length != 0 &&
-          petArray.map((pet) => <Petcard petName={pet.name} />)}
+        {petArray.length !== 0 ? (
+          petArray.map((pet) => (
+            <Petcard image={pet.image} petName={pet.name} />
+          ))
+        ) : (
+          <h2>No pets added! Let's get started!</h2>
+        )}
         <button onClick={addPetHandler} className={dashboard.button}>
           + Add Pet
         </button>

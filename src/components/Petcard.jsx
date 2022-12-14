@@ -4,8 +4,8 @@ const Petcard = (props) => {
     <div className={card.card}>
       <img
         alt="pet avatar"
-        class={card.petavatar}
-        src="https://dogsbestlife.com/wp-content/uploads/2022/06/cutest-dog-breeds-scaled-e1655990275393.jpeg"
+        className={card.petavatar}
+        src={`http://localhost:8080/${props.image}`} //need to fix when launched
       />
       <h1 className={card.petName}>{props.petName}</h1>
       <img
