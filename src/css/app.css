@@ -1,9 +1,39 @@
 .window {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    min-height: 100vh;
-    background-color: #F5E6BE;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f5e6be;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 7fr 1fr;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  background-color: white;
+  width: 100vw;
+  box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.1);
+}
+
+.header section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header svg {
+  height: 4rem;
+  margin: 0 2rem;
+  cursor: pointer;
+}
+
+.header img {
+  height: 2rem;
+  width: auto;
+  margin: 0 2rem;
+  cursor: pointer;
+}

@@ -1,11 +1,19 @@
+import { useNavigate } from "react-router";
 import card from "./petcard.module.css";
+
 const Petcard = (props) => {
+  const navigate = useNavigate();
+
+  const onClickHandler = () => {
+    navigate(`./${props.id}`);
+  };
+
   return (
-    <div className={card.card}>
+    <div onClick={onClickHandler} className={card.card}>
       <img
         alt="pet avatar"
         className={card.petavatar}
-        src={`http://localhost:8080/${props.image}`} //need to fix when launched
+        src={`${props.image}`} //need to fix when launched
       />
       <h1 className={card.petName}>{props.petName}</h1>
       <img

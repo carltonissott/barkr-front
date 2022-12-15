@@ -5,7 +5,14 @@
   border-radius: 20px;
   grid-template-columns: 1fr 5fr .5fr;
   margin: 1rem;
+  cursor: pointer;
+  transition: all .4s;
 }
+
+.card:hover{
+  transform: scale(1.05);
+}
+
 .petName {
   font-size: 3rem;
 }

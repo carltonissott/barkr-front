@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Background from "../../components/Background";
 import Petcard from "../../components/Petcard";
+import UserBar from "../../components/UserBar";
 import dashboard from "./dashboard.module.css";
 
 const Dashboard = (props) => {
@@ -29,6 +30,9 @@ const Dashboard = (props) => {
       },
       body: JSON.stringify(graphqlQuery),
     })
+      .then((response) => {
+        console.log(response)
+      })
       .then((res) => {
         return res.json();
       })
@@ -39,13 +43,13 @@ const Dashboard = (props) => {
   }, []);
 
   const fetchPetData = (array) => {
-    console.log("here4");
     array.forEach((element) => {
       const graphqlQuery = {
         query: `
                     {pet(id:"${element._id}")
                           {name
                             image
+                            _id
                         }  
                       }
                     `,
@@ -79,9 +83,15 @@ const Dashboard = (props) => {
       <div className={dashboard.main}>
         <h1>Welcome, {user} </h1>
         <h2>Your pets:</h2>
+
         {petArray.length !== 0 ? (
           petArray.map((pet) => (
-            <Petcard image={pet.image} petName={pet.name} />
+            <Petcard
+              key={pet._id}
+              id={pet._id}
+              image={pet.image}
+              petName={pet.name}
+            />
           ))
         ) : (
           <h2>No pets added! Let's get started!</h2>
