@@ -19,19 +19,77 @@
   width: 100%;
   height: auto;
 }
-.image {
+.imagecontainer {
   width: 40%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50px;
+  min-height: 40vh;
+  max-height: 70vh;
+  position: relative;
+  display: flex;
 }
 
-.description {
+.image {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  border-radius: 50px;
+  object-fit: cover;
+}
+
+.imagecontainer:hover .overlay {
+  visibility: visible;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.imagemodal {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  background-color: black;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.generalinfo {
   margin: 2rem 5rem;
   width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
-.description p {
+
+.edit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.edit img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 10px;
+  transition: all 1s;
+  cursor: pointer;
+}
+.edit img:hover {
+  transform: scale(1.1);
 }

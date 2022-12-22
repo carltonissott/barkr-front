@@ -29,7 +29,7 @@ const AddPet = () => {
     });
     const decoded = await imageUrl.json();
     const image = await decoded.filePath.replace(/\\/g, "/");
-    console.log(`"${image}"`)
+    console.log(`"${image}"`);
     const graphqlQuery = {
       query: `
         mutation{
@@ -38,6 +38,7 @@ const AddPet = () => {
                 phone:"${e.target[6].value}"
                 image: "${image}"
                 type: "${type}"
+                description: "${e.target[7].value}"
             }){
                 breed
             }
@@ -84,6 +85,8 @@ const AddPet = () => {
           <input id="address" type="text" />
           <label htmlFor="phone">Phone Number:</label>
           <input id="phone" type="tel" />
+          <label htmlFor="description">Description:</label>
+          <textarea rows="5" cols="33" id="description"></textarea>
           <button className={addpet.button} type="submit">
             +Add Pet!
           </button>

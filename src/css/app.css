@@ -37,3 +37,54 @@
   margin: 0 2rem;
   cursor: pointer;
 }
+.showprofilebackground {
+  background-color: black;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.showprofile {
+  display: flex;
+  height: 100vh;
+  width: 30vw;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  animation: 0.5s ease-out 0s 1 slidein;
+}
+
+.showprofile li {
+  font-size: 3rem;
+  padding: 2rem 1rem;
+  list-style: none;
+  cursor: pointer;
+  text-decoration: 1px solid transparent;
+  transition: text-decoration .5s;
+}
+
+.showprofile li:hover{
+  
+  text-decoration: underline;
+  text-underline-offset: 1rem;
+}
+
+.showprofile img{
+  height: 3rem;
+  width: auto;
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  cursor: pointer;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}

@@ -22,6 +22,7 @@ const Dashboard = (props) => {
         
         `,
     };
+
     fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
@@ -30,9 +31,6 @@ const Dashboard = (props) => {
       },
       body: JSON.stringify(graphqlQuery),
     })
-      .then((response) => {
-        console.log(response)
-      })
       .then((res) => {
         return res.json();
       })
