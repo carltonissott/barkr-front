@@ -124,6 +124,24 @@ const SinglePet = () => {
     setRefreshKey(refreshKey + 1);
   };
 
+  const deletePetHandler = async () => {
+    const graphqlQuery = {
+      query: `
+        mutation{
+          deletePet(petId:"${params.petId}")
+        
+      }`,
+    };
+    await fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(graphqlQuery),
+    });
+  };
+
   return (
     <Background>
       {isLoading ? (
@@ -136,7 +154,7 @@ const SinglePet = () => {
               {isEditing ? (
                 <div className={style.imagemodal}>
                   <form
-                  className={style.flex}
+                    className={style.flex}
                     onSubmit={submitImageHandler}
                     encType="multipart/form-data"
                   >
@@ -158,6 +176,9 @@ const SinglePet = () => {
             description={petData.description}
             refresh={refreshHandler}
           />
+          <button className={style.delete} onClick={deletePetHandler}>
+            Delete Pet
+          </button>
         </div>
       )}
     </Background>

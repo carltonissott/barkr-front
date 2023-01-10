@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 const UserBar = () => {
   const navigate = useNavigate();
   const goHome = () => {
-    navigate("/dashboard");
+    navigate("/");
   };
 
   const [showProfile, setShowProfile] = useState(false);

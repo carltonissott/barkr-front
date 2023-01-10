@@ -39,6 +39,11 @@
   background-color: white;
   border: 0;
   padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.delete:hover{
+  color: red;
 }
 
 .button {

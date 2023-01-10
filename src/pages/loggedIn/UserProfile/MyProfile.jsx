@@ -17,6 +17,7 @@ const MyProfile = () => {
   };
 
   const [user, setUser] = useState(null);
+  const [updated, setUpdated] = useState(0);
 
   const [loading, setLoading] = useState(true);
 
@@ -50,7 +51,7 @@ const MyProfile = () => {
         setUser(resData.data.user);
         setLoading(false);
       });
-  }, []);
+  }, [updated]);
 
   const [edit, setEdit] = useState(false);
 
@@ -90,10 +91,36 @@ const MyProfile = () => {
         body: JSON.stringify(graphqlQuery),
       });
       const updatedUser = await updated.json();
+      setUpdated(updated + 1);
     };
     updateUser();
 
     setEdit(false);
+  };
+
+  const deleteAccountHandler = () => {
+    const graphqlQuery = {
+      query: `
+      mutation{
+        deleteUser(
+          id: "${localStorage.getItem("userId")}"
+        )
+      }`,
+    };
+    const deleteUser = async () => {
+      const deleted = await fetch("http://localhost:8080/graphql", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(graphqlQuery),
+      });
+      localStorage.setItem("token", "");
+      navigate("/");
+    };
+    deleteUser();
+ 
   };
 
   return (
@@ -109,7 +136,11 @@ const MyProfile = () => {
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" defaultValue={user.email} />
                 <label htmlFor="firstName">First Name:</label>
-                <input type="text" id="firstName" defaultValue={user.firstName} />
+                <input
+                  type="text"
+                  id="firstName"
+                  defaultValue={user.firstName}
+                />
                 <label htmlFor="lastName">Last Name:</label>
                 <input type="text" id="lastName" defaultValue={user.lastName} />
                 <label htmlFor="tel">Telephone:</label>
@@ -139,7 +170,12 @@ const MyProfile = () => {
                   <button onClick={logoutHandler} className={styles.logout}>
                     Log Out
                   </button>
-                  <button className={styles.delete}>Delete Account</button>
+                  <button
+                    onClick={deleteAccountHandler}
+                    className={styles.delete}
+                  >
+                    Delete Account
+                  </button>
                 </div>
               </>
             )}

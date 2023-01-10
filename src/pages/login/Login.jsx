@@ -36,11 +36,21 @@ const Login = (props) => {
       .then((res) => {
         return res.json();
       })
+      .then((result) => {
+        if (!result.errors) {
+          return result;
+        } else {
+          console.log(result.errors[0].message);
+          setIsLoading(false);
+        }
+      })
       .then((loginData) => {
         setToken(loginData.data.login.token);
         setUserId(loginData.data.login.userId);
         localStorage.setItem("token", loginData.data.login.token);
         localStorage.setItem("userId", loginData.data.login.userId);
+        const expiration = Date.now() + 7200000;
+        localStorage.setItem("expiration", expiration);
         setIsLoading(false);
         props.userInfo(userId);
         navigate("/dashboard");

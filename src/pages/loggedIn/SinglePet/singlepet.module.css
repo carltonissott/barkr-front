@@ -7,7 +7,7 @@
   border-radius: 10px;
   margin: 5rem;
 }
-.flex{
+.flex {
   display: flex;
   flex-direction: column;
 }
@@ -96,4 +96,17 @@
 }
 .edit img:hover {
   transform: scale(1.1);
+}
+
+.delete {
+  background-color: white;
+  color: red;
+  text-decoration: underline;
+  border: 0;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.delete:hover{
+  color: brown;
 }
