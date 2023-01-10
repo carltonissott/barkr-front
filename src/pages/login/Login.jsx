@@ -42,7 +42,7 @@ const Login = (props) => {
         localStorage.setItem("token", loginData.data.login.token);
         localStorage.setItem("userId", loginData.data.login.userId);
         setIsLoading(false);
-        props.userInfo(userId)
+        props.userInfo(userId);
         navigate("/dashboard");
       });
   };
@@ -56,7 +56,7 @@ const Login = (props) => {
             <img id={styles.loading} src={loading} />
           </>
         ) : (
-          <form onSubmit={loginHandler}>
+          <form className={loginPage.loginForm} onSubmit={loginHandler}>
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" />
             <label htmlFor="password">Password:</label>

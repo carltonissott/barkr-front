@@ -3,12 +3,15 @@ import { useNavigate } from "react-router";
 import Background from "../../components/Background";
 import Petcard from "../../components/Petcard";
 import UserBar from "../../components/UserBar";
+import useAuth from "../../hooks/useAuth";
 import dashboard from "./dashboard.module.css";
 
 const Dashboard = (props) => {
   const [user, setUser] = useState(null);
   const [petArray, setPetArray] = useState([]);
   const navigate = useNavigate();
+
+  useAuth();
 
   useEffect(() => {
     const graphqlQuery = {

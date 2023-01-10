@@ -1,6 +1,15 @@
-form {
+.form {
+  display: flex;
+}
+.col1 {
   display: flex;
   flex-direction: column;
+  padding: 0 1rem;
+}
+.col2 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
 }
 
 form h1 {

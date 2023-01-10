@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import Background from "../../components/Background";
+import useAuth from "../../hooks/useAuth";
 import addpet from "./addpet.module.css";
 
 const AddPet = () => {
   const navigate = useNavigate();
+
+  useAuth()
+
+
 
   const addPetHandler = async (e) => {
     e.preventDefault();
@@ -62,7 +68,7 @@ const AddPet = () => {
     <Background>
       <div className={addpet.flex}>
         <h1>Add pet:</h1>
-        <form onSubmit={addPetHandler} encType="multipart/form-data">
+        <form className={addpet.flex} onSubmit={addPetHandler} encType="multipart/form-data">
           <div className={addpet.radiobuttons}>
             <label htmlFor="cat">
               <img src="https://img.icons8.com/ios/100/null/cat-head--v1.png" />

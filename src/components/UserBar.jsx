@@ -6,9 +6,6 @@ const UserBar = () => {
   const goHome = () => {
     navigate("/dashboard");
   };
-  const openProfile = () => {
-    navigate("/dashboard");
-  };
 
   const [showProfile, setShowProfile] = useState(false);
 
@@ -18,6 +15,26 @@ const UserBar = () => {
 
   const hideProfileHandler = () => {
     setShowProfile(false);
+  };
+
+  const logoutHandler = () => {
+    //log out user
+    localStorage.setItem("token", "");
+    localStorage.setItem("userId", "");
+    //redirect user to main page
+    navigate("/");
+  };
+
+  const myPetsHandler = () => {
+    setShowProfile(false);
+    navigate("/dashboard");
+  };
+
+  const loginHandler = () => {
+    navigate("/login");
+  };
+  const myAccountHandler = () => {
+    navigate("/dashboard/myprofile"); //navigate to my profile
   };
 
   return (
@@ -108,12 +125,23 @@ const UserBar = () => {
             className="showprofilebackground"
           ></div>
           <div className="showprofile">
-            <ul>
-              <li>My Account</li>
-              <li>My Pets</li>
-              <li>Sign Out</li>
-            </ul>
-            <img onClick={hideProfileHandler} src="https://img.icons8.com/windows/96/null/macos-close.png"/>
+            {!localStorage.getItem("token") ? (
+              <ul>
+                <li onClick={loginHandler}>Login</li>
+              </ul>
+            ) : (
+              <ul>
+                <li onClick={myAccountHandler}>My Account</li>
+                <li onClick={myPetsHandler}>My Pets</li>
+
+                <li onClick={logoutHandler}>Sign Out</li>
+              </ul>
+            )}
+
+            <img
+              onClick={hideProfileHandler}
+              src="https://img.icons8.com/windows/96/null/macos-close.png"
+            />
           </div>
         </>
       )}

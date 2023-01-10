@@ -136,6 +136,7 @@ const SinglePet = () => {
               {isEditing ? (
                 <div className={style.imagemodal}>
                   <form
+                  className={style.flex}
                     onSubmit={submitImageHandler}
                     encType="multipart/form-data"
                   >

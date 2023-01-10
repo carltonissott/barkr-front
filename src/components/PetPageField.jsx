@@ -50,7 +50,7 @@ const PetPageField = (prop) => {
       {!isEditing ? (
         <p>{prop.description}</p>
       ) : (
-        <form onSubmit={updatePetHandler}>
+        <form className={style.flex} onSubmit={updatePetHandler}>
           <textarea
             id={prop.id}
             rows="5"
