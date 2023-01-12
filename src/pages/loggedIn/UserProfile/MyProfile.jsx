@@ -126,7 +126,6 @@ const MyProfile = () => {
   return (
     <>
       <Background>
-        <UserBar />
         {loading ? (
           <h1>is loading...</h1>
         ) : (

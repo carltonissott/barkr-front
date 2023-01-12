@@ -1,26 +1,29 @@
 .loginForm {
   display: flex;
   flex-direction: column;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 2rem;
 }
 
-.paragraph{
-    font-size: 1.2rem;
-    text-align: center;
+.paragraph {
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 .button {
-    font-size: 2rem;
-    width: 100%;
-    border: 0;
-    margin-top: 1rem;
-    padding: 0.2em;
-    border-radius: 20px;
-    background-color: #e76f51;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #f4a261;
-  }
-  
+  font-size: 2rem;
+  width: 100%;
+  border: 0;
+  margin-top: 1rem;
+  padding: 0.2em;
+  border-radius: 20px;
+  background-color: #e76f51;
+  color: white;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #f4a261;
+}
+

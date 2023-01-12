@@ -5,7 +5,7 @@ const Homepage = () => {
   return (
     <Background>
       <div className={styles.homepagebuttons}>
-        <Link className={styles.link}>
+        <Link className={styles.link} to="./foundpet">
           <button className={styles.button}>Found Pet </button>
         </Link>
         <Link className={styles.link}  to='./login'>

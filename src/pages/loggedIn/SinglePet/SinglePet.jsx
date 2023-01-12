@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Background from "../../../components/Background";
 import PetPageField from "../../../components/PetPageField";
+import useAuth from "../../../hooks/useAuth";
 import style from "./singlepet.module.css";
 
 const SinglePet = () => {
@@ -14,6 +15,8 @@ const SinglePet = () => {
   useEffect(() => {
     fetchPet();
   }, [PetPageField, refreshKey]);
+
+  const navigate = useNavigate();
 
   const fetchPet = async () => {
     setIsLoading(true);
@@ -140,7 +143,10 @@ const SinglePet = () => {
       },
       body: JSON.stringify(graphqlQuery),
     });
+    navigate('/dashboard')
   };
+
+  useAuth()
 
   return (
     <Background>

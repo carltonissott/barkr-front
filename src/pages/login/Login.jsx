@@ -60,7 +60,7 @@ const Login = (props) => {
   return (
     <Background>
       <div className={loginPage.loginForm}>
-        <h1>Login:</h1>
+        {/* <h1>Login:</h1> */}
         {isLoading ? (
           <>
             <img id={styles.loading} src={loading} />

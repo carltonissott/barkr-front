@@ -11,7 +11,7 @@
   display: grid;
   grid-template-columns: 1fr 7fr 1fr;
   align-items: center;
-  position: absolute;
+  position: relative;
   top: 0;
   background-color: white;
   width: 100vw;

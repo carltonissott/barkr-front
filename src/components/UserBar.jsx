@@ -41,6 +41,7 @@ const UserBar = () => {
     <>
       <div className="header">
         <section>
+          
           <svg
             onClick={goHome}
             id="logo-75"

@@ -10,6 +10,8 @@ import AddPet from "./pages/loggedIn/AddPet";
 import SinglePet from "./pages/loggedIn/SinglePet/SinglePet";
 import Error from "./pages/Error";
 import MyProfile from "./pages/loggedIn/UserProfile/MyProfile";
+import FoundPet from "./pages/foundpet/FoundPet";
+import PetPagePublic from "./pages/foundpet/PetPagePublic";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,6 +29,8 @@ function App() {
       <Route path="/dashboard" element={<Dashboard user={user} />} />
       <Route path="/dashboard/:petId" element={<SinglePet />} />
       <Route path="/dashboard/myprofile" element={<MyProfile />} />
+      <Route path="/foundpet" element={<FoundPet />} />
+      <Route path="/foundpet/:petId" element={<PetPagePublic />} />
       <Route path="/error" element={<Error />} />
     </Routes>
   );

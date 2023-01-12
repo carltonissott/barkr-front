@@ -1,0 +1,54 @@
+.main {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.main h1 {
+  font-size: 3rem;
+  margin: 2rem 2rem 0rem;
+}
+
+.main h3 {
+  font-size: 2rem;
+  font-weight: 300;
+  margin: 0;
+}
+.main input {
+  margin: 1rem;
+  width: 95%;
+}
+
+.main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main form button {
+  font-size: 2rem;
+  width: 100%;
+  border: 0;
+  padding: 0.5em;
+  border-radius: 20px;
+  background-color: #e76f51;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s;
+  margin: 1rem 0;
+}
+
+.main form button:hover {
+  background-color: #f4a261;
+  transform: translateY(-20px);
+}
+
+.alert {
+  color: red;
+  font-weight: 600;
+  text-decoration: underline;
+  margin: 0;
+  padding: 0;
+}
