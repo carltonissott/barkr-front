@@ -4,7 +4,11 @@
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  background-color: #f5e6be;
+  /* background-color: #f5e6be; */
+  background-color: #fcf8ee;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .header {

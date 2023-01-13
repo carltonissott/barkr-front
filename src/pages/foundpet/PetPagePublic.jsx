@@ -51,43 +51,29 @@ const PetPagePublic = () => {
           <p>Loading...</p>
         ) : (
           <>
-            <div className={style.name_and_photo}>
-              <h1>Hi I'm Basi!</h1>
-              <div className={style.profilePic} />
-            </div>
-            <p>
-              I am a playful and curious cat. I love to chase toys around the
-              house and explore my surroundings. I am also quite affectionate
-              with my owners and enjoy cuddling up with them on the couch. I can
-              be independent at times, but I also like to be near my owners and
-              will follow them around the house. I am known to be quite vocal
-              and will often meow to get my owners' attention or to express my
-              happiness. Overall, I am a loving and entertaining companion.
-            </p>
-            <section className={style.medical}>
-              <h2>Medical History:</h2>
-              <ul>
-                <li>Flea Treatment</li>
-                <li>Rabies Vaccination (Expires 10/24)</li>
-                <li>Neutered</li>
-                <li>HeartWorm Protection</li>
-              </ul>
+            <section className={style.header}>
+              <div className={style.title}>
+                <h3>Hi I'm,</h3>
+                <h1>BASI</h1>
+              </div>
+              <img src="https://images.wideopenpets.com/wp-content/uploads/2022/06/orange-cat-breeds-1.png" />
             </section>
-            <section className={style.funfacts}>
-              <h2>Some Fun Facts:</h2>
-              <ul>
-                <li>I love cuddles with mom!</li>
-                <li>My favorite treats are temptations!</li>
-              </ul>
-            </section>
-            <section className={style.location}>
-              <iframe
-                className={style.map}
-                src="https://storage.googleapis.com/maps-solutions-5xfllzox8w/commutes/wtgq/commutes.html"
-                width="100%"
-                height="100%"
-                loading="lazy"
-              ></iframe>
+            <section className={style.info}>
+              <div className={style.info_box}>
+                <h2>About Me!</h2>
+                <p>
+                  I am a playful and curious cat. I love to chase toys around
+                  the house and explore my surroundings. I am also quite
+                  affectionate with my owners and enjoy cuddling up with them on
+                  the couch. I can be independent at times, but I also like to
+                  be near my owners and will follow them around the house. I am
+                  known to be quite vocal and will often meow to get my owners'
+                  attention or to express my happiness. Overall, I am a loving
+                  and entertaining companion.
+                </p>
+              </div>
+              <div className={style.info_box}>two</div>
+              <div className={style.info_box}>three</div>
             </section>
           </>
         )}

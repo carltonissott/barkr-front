@@ -41,7 +41,6 @@ const UserBar = () => {
     <>
       <div className="header">
         <section>
-          
           <svg
             onClick={goHome}
             id="logo-75"
@@ -126,7 +125,8 @@ const UserBar = () => {
             className="showprofilebackground"
           ></div>
           <div className="showprofile">
-            {!localStorage.getItem("token") ? (
+            {!localStorage.getItem("token") ||
+            localStorage.getItem("expiration") < Date.now() ? (
               <ul>
                 <li onClick={loginHandler}>Login</li>
               </ul>
