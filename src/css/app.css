@@ -5,7 +5,8 @@
   width: 100vw;
   min-height: 100vh;
   /* background-color: #f5e6be; */
-  background-color: #fcf8ee;
+  /* background-color: #fcf8ee; */
+  background-color: white;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -91,4 +92,16 @@
   to {
     transform: translateX(0%);
   }
+}
+
+.loading{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.loading p{
+  margin: 0;
+  padding: 0;
 }

@@ -1,56 +1,85 @@
-.title {
-  color: #161727;
-  padding: 5vw;
-  max-width: 100vw;
-}
-
-.title h3 {
-  margin: 0;
-}
-.title h1 {
-  margin: 0;
-  font-size: 4rem;
-}
-
-.header {
+.top {
+  background-color: #f8d7cb;
+  padding: 0;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
-.header img {
+.profilepic {
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  margin: 5rem 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+.profilepic img {
+  border-radius: 50%;
+  border: 0.5rem solid rgba(0, 0, 0, 0.158);
+  height: 100%;
+  width: 100%;
   object-fit: cover;
-  width: 40%;
-  min-height: 20vh;
-  margin: 0 1rem;
+}
+.basicdetails {
+  background-color: white;
   border-radius: 20px;
+  position: relative;
+  top: -5rem;
+  margin: 0 2rem;
+  padding: 1rem;
+  box-shadow: 10px 10px 63px -48px rgba(0, 0, 0, 0.75);
 }
 
-.info {
+.shortinfo {
   display: grid;
-  overflow-y: auto;
-  max-width: 100vw;
-  grid-auto-flow: column;
-  margin: 2rem 0;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
-.info_box {
-  width: 70vw;
-  min-height: 30vh;
-  margin: 1rem;
-  background-color: #ffff;
-  border-radius: 30px;
-  color: #003c66;
-  padding: 2rem;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
-}
-
-.info_box h2 {
-  font-weight: 700;
-  font-size: 2.5rem;
-  text-align: center;
+.shortinfo div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.4rem;
   margin: 0;
 }
 
-.info_box p {
-  color: #444444;
-  line-height: 1.6;
+.shortinfo div h3 {
+  margin: 0;
+}
+
+.name {
+  font-size: 1.4rem;
+}
+.age h3 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #999999;
+}
+.breed h3 {
+  color: #999999;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.breed img {
+  height: 2rem;
+  margin-right: 0.5rem;
+}
+.sex img {
+  height: 3rem;
+  width: 3rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .background {
+    max-width: 100vw;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .main {
+    width: 30%;
+    background-color: white;
+  }
 }

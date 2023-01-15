@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Background from "../../../components/Background";
-import UserBar from "../../../components/UserBar";
+import Loading from "../../../components/Loading";
 import useAuth from "../../../hooks/useAuth";
 
 import styles from "./myprofile.module.css";
@@ -49,7 +49,10 @@ const MyProfile = () => {
       })
       .then((resData) => {
         setUser(resData.data.user);
-        setLoading(false);
+        const timer1 = setTimeout(() => setLoading(false), 500);
+        return () => {
+          clearTimeout(timer1);
+        };
       });
   }, [updated]);
 
@@ -120,14 +123,15 @@ const MyProfile = () => {
       navigate("/");
     };
     deleteUser();
- 
   };
 
   return (
     <>
       <Background>
         {loading ? (
-          <h1>is loading...</h1>
+          <>
+            <Loading />
+          </>
         ) : (
           <div className={styles.background}>
             {edit ? (
