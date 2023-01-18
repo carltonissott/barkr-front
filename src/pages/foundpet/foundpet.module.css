@@ -4,18 +4,20 @@
   align-items: center;
   border-radius: 20px;
   flex-direction: column;
-  padding: 2rem;
+  font-size: .9rem;
+  margin: 1rem;
 }
 
 .main h1 {
-  font-size: 3rem;
+  font-size: 3em;
   margin: 2rem 2rem 0rem;
 }
 
 .main h3 {
-  font-size: 2rem;
+  font-size: 1.7em;
   font-weight: 300;
-  margin: 0;
+  margin: 0rem 2rem 0rem;
+
 }
 .main input {
   margin: 1rem;
@@ -26,6 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 3rem;
 }
 .main form button {
   font-size: 2rem;
@@ -51,4 +54,14 @@
   text-decoration: underline;
   margin: 0;
   padding: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .main{
+    font-size: 1rem;
+  margin: 2rem;
+  padding: 2rem;
+
+
+  }
 }

@@ -1,5 +1,10 @@
+.main {
+  background-color: rgb(252, 252, 252);
+}
+
 .top {
   background-color: #f8d7cb;
+  background-image: url(../assets/pawprints.png);
   padding: 0;
   width: 100%;
   display: flex;
@@ -25,7 +30,7 @@
   border-radius: 20px;
   position: relative;
   top: -5rem;
-  margin: 0 2rem;
+  margin: 0 2rem -5rem;
   padding: 1rem;
   box-shadow: 10px 10px 63px -48px rgba(0, 0, 0, 0.75);
 }
@@ -70,6 +75,112 @@
   width: 3rem;
 }
 
+.vaccination {
+  margin: 0 2rem;
+  padding: 1rem;
+}
+
+.vaccination h2 {
+  font-size: 1.3rem;
+  margin-bottom: -1rem;
+}
+
+.vaccination ul {
+  --icon-size: 1em;
+  --gutter: 0.5em;
+  padding: 0 0 0 var(--icon-size);
+  font-size: 1.2rem;
+}
+
+.vaccination ul li {
+  padding-left: var(--gutter);
+  padding-top: 1rem;
+  font-weight: 500;
+  color: #444444;
+}
+
+.vaccination ul li::marker {
+  content: "\f481"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  font-size: var(--icon-size);
+}
+
+.lightpink {
+  background-color: #fef6f2;
+}
+
+.mapsection {
+  background-color: #fef6f2;
+  padding: 1rem;
+}
+
+.mapbox {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 2rem;
+  height: 40vh;
+}
+
+.contactInfo {
+  background-color: black;
+  border-radius: 20px;
+  display: grid;
+  margin: 2rem;
+  position: sticky;
+  padding: 0 1rem ;
+  bottom: 10px;
+  color: white;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "icon firstName firstName"
+    "icon phoneNumber city";
+}
+.contactInfo h5 {
+  font-weight: 400;
+  color: #b3b3b3;
+  margin: 0;
+}
+.contactInfo h4 {
+  margin: 0;
+}
+
+.icon {
+  background-color: #f47b52;
+  border-radius: 1rem;
+  grid-area: icon;
+  margin: 1rem;
+  margin-left: .3rem;
+  padding: 1rem;
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.firstName {
+  grid-area: firstName;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+.phoneNumber {
+  grid-area: phoneNumber;
+  display: flex;
+  align-items: center;
+}
+
+.city {
+  grid-area: city;
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  align-items: center;
+  justify-content: center;
+  margin-left: .5rem;
+  text-align: center;
+  gap: 10px;
+}
+
 @media only screen and (min-width: 768px) {
   .background {
     max-width: 100vw;
@@ -79,7 +190,19 @@
     justify-content: center;
   }
   .main {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .background {
+    max-width: 100vw;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .main {
     width: 30%;
-    background-color: white;
   }
 }

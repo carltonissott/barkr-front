@@ -1,8 +1,12 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Background from "../../components/Background";
 import Loading from "../../components/Loading";
+import SimpleMap from "../../components/Test";
 import style from "./foundpetpublic.module.css";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
 
 const PetPagePublic = () => {
   const params = useParams();
@@ -92,6 +96,36 @@ const PetPagePublic = () => {
                 to express my happiness. Overall, I am a loving and entertaining
                 companion.
               </p>
+            </div>
+            <section className={style.vaccination}>
+              <h2>Vaccination/Medical Status</h2>
+              <ul>
+                <li>Revolution (02/03) </li>
+                <li>Rabies (11/29) </li>
+              </ul>
+            </section>
+            <div className={style.lightpink}>
+              <section className={style.mapsection}>
+                <h3>My Home:</h3>
+                <div className={style.mapbox}>
+                  <SimpleMap />
+                </div>
+              </section>
+              <section className={style.contactInfo}>
+                <div className={style.icon}>
+                  <FontAwesomeIcon icon={faPhone} />
+                </div>
+                <div className={style.firstName}>
+                  <h4>Carlton Issott</h4>
+                </div>
+                <div className={style.phoneNumber}>
+                  <h5>321-544-0711</h5>
+                </div>
+                <div className={style.city}>
+                  <FontAwesomeIcon icon={faLocationPin} />
+                  <h5> Gainesville, Fl</h5>
+                </div>
+              </section>
             </div>
           </div>
         </div>

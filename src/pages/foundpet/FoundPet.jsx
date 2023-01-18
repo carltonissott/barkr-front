@@ -47,13 +47,20 @@ const FoundPet = () => {
   return (
     <Background>
       <div className={styles.main}>
-        <h1>Uh oh! Let's get this pet back home!</h1>
-        <h3>Please enter the code found on the pets collar.</h3>
+        <div className={styles.heading}>
+          <h1>Uh oh! Let's get this pet back home!</h1>
+          <h3>Please enter the code found on the pets collar.</h3>
+        </div>
         <form onSubmit={findPetHandler}>
           <label htmlFor="pettag" hidden>
             Pet Tag ID Code:
           </label>
-          <input type="text" id="pettag" placeholder="Ex. 9445S4Fw542" required />
+          <input
+            type="text"
+            id="pettag"
+            placeholder="Ex. 9445S4Fw542"
+            required
+          />
           {alert && <p className={styles.alert}>{alert}</p>}
           <button type="submit">Submit</button>
         </form>

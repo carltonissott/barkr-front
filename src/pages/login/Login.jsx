@@ -4,6 +4,7 @@ import styles from "../signup/register.module.css";
 import loginPage from "./login.module.css";
 import loading from "../assets/loading.gif";
 import { useNavigate } from "react-router";
+import Loading from "../../components/Loading";
 
 const Login = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,9 +63,7 @@ const Login = (props) => {
       <div className={loginPage.loginForm}>
         {/* <h1>Login:</h1> */}
         {isLoading ? (
-          <>
-            <img id={styles.loading} src={loading} />
-          </>
+         <Loading/>
         ) : (
           <form className={loginPage.loginForm} onSubmit={loginHandler}>
             <label htmlFor="email">Email:</label>
