@@ -1,0 +1,63 @@
+.vaccination {
+  margin: 0 2rem;
+  padding: 1rem 1rem 0;
+  position: relative;
+}
+
+.vaccination h2 {
+  font-size: 1.3rem;
+  margin-bottom: -1rem;
+}
+.contact h2 {
+  font-size: 1.3rem;
+}
+
+.vaccination ul {
+  --icon-size: 1em;
+  --gutter: 0.5em;
+  padding: 0 0 0 var(--icon-size);
+  font-size: 1.2rem;
+}
+
+.vaccination li {
+  padding-left: var(--gutter);
+  padding-top: 1rem;
+  font-weight: 500;
+  color: #444444;
+}
+
+.vaccination ul li::marker {
+  content: "\f481"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  font-size: var(--icon-size);
+}
+
+.contact li {
+  padding: 1rem;
+  font-weight: 500;
+  /* color: #444444; */
+  color: white;
+
+}
+
+.contact {
+  margin: 0 2rem;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.contact ul {
+    width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: #ffb7b7 solid 5px; */
+  background-color: #ff7272 ;
+  border-radius: 1rem;
+  list-style: none;
+  font-size: 1.2rem;
+  padding: 0;
+  box-shadow: 10px 10px 63px 0px rgba(248,215,203, .5);
+
+}

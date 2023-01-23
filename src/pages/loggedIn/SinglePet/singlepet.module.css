@@ -127,7 +127,6 @@
   color: brown;
 } */
 
-
 .main {
   background-color: rgb(252, 252, 252);
 }
@@ -139,6 +138,7 @@
   width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
 }
 .profilepic {
@@ -167,15 +167,16 @@
 
 .shortinfo {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: 1fr 1fr;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .shortinfo div {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0 0.4rem;
+  /* padding: 0 3rem; */
   margin: 0;
 }
 
@@ -183,7 +184,7 @@
   margin: 0;
 }
 
-.name {
+.name h3 {
   font-size: 1.4rem;
 }
 .age h3 {
@@ -200,40 +201,17 @@
   height: 2rem;
   margin-right: 0.5rem;
 }
+.sex {
+  justify-content: flex-end;
+}
+.age {
+  justify-content: flex-end;
+}
 .sex img {
   height: 3rem;
   width: 3rem;
 }
 
-.vaccination {
-  margin: 0 2rem;
-  padding: 1rem;
-}
-
-.vaccination h2 {
-  font-size: 1.3rem;
-  margin-bottom: -1rem;
-}
-
-.vaccination ul {
-  --icon-size: 1em;
-  --gutter: 0.5em;
-  padding: 0 0 0 var(--icon-size);
-  font-size: 1.2rem;
-}
-
-.vaccination ul li {
-  padding-left: var(--gutter);
-  padding-top: 1rem;
-  font-weight: 500;
-  color: #444444;
-}
-
-.vaccination ul li::marker {
-  content: "\f481"; /* FontAwesome Unicode */
-  font-family: FontAwesome;
-  font-size: var(--icon-size);
-}
 
 .lightpink {
   background-color: #fef6f2;
@@ -257,7 +235,7 @@
   display: grid;
   margin: 2rem;
   position: sticky;
-  padding: 0 1rem ;
+  padding: 0 1rem;
   bottom: 10px;
   color: white;
   grid-template-columns: 1fr 1fr 1fr;
@@ -280,7 +258,7 @@
   border-radius: 1rem;
   grid-area: icon;
   margin: 1rem;
-  margin-left: .3rem;
+  margin-left: 0.3rem;
   padding: 1rem;
   color: white;
   font-size: 2rem;
@@ -306,19 +284,117 @@
   grid-template-columns: 1fr 6fr;
   align-items: center;
   justify-content: center;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   text-align: center;
   gap: 10px;
 }
 
-.iconedit{
+.iconedit {
   color: #444444;
 }
 
-.iconedit:hover{
+.iconedit:hover {
   cursor: pointer;
   color: black;
 }
+
+.edit {
+  margin-bottom: -7rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit button {
+  padding: 1rem;
+  margin: 1rem 2rem;
+  border: 0;
+  background-color: #f47b52;
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.edit button:last-child {
+  background-color: #f45252;
+}
+.edit button:last-child:hover {
+  background-color: #ff3232;
+}
+
+.edit button:hover {
+  background-color: #ff6532;
+}
+
+.editForm input {
+  font-size: 1.2rem;
+  color: #444444;
+  padding: 0.2rem 0.7rem;
+  margin: 0.5rem 1rem;
+  border-radius: 5px;
+  border: #44444431 solid 1px;
+  width: 100%;
+}
+
+.editForm .shortinfo {
+  font-size: 1.5rem;
+}
+.textbox {
+  width: 100%;
+  align-items: center;
+  display: flex;
+}
+
+.textbox textarea {
+  width: 100%;
+  height: 20vh;
+  padding: 0.2rem 0.7rem;
+  margin: 0.5rem 1rem;
+  border-radius: 5px;
+  border: #44444431 solid 1px;
+  color: #444444;
+}
+
+.editdeleteicons {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+}
+.editdeleteicons svg {
+  margin: 0 0.5rem;
+}
+
+.addsection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.addsection button {
+  margin-bottom: 2rem;
+  border: 0;
+  background-color: #f47b52;
+  color: rgb(247, 247, 247);
+  padding: 1rem 1.3rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.addsection button:hover{
+  background-color: #f45252;
+}
+
+.mapform{
+  display: flex;
+}
+
+
+
 
 @media only screen and (min-width: 768px) {
   .background {

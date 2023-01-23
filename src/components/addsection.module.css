@@ -1,0 +1,139 @@
+.modal {
+    background-color: rgba(0, 0, 0, 0.726);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.modalinner {
+  background-color: white;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem 4rem;
+  border-radius: 1rem;
+}
+
+.select {
+  display: flex;
+  width: 100%;
+  font-size: 1.5rem;
+  align-items: center;
+}
+.select svg {
+  padding: 0.4rem;
+  color: #444444;
+}
+.fieldinput {
+  display: flex;
+  align-items: center;
+}
+.select select {
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: #44444431 solid 1px;
+  color: #444444;
+}
+
+h3 {
+  color: #1f1f1f;
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+hr {
+  border: #8f8f8f solid 1px;
+  width: 100%;
+  margin: 1rem;
+}
+.addField {
+  margin: 1rem;
+  border: 0;
+  background-color: #f47b52;
+  color: rgb(247, 247, 247);
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+}
+
+.addField:hover {
+  background-color: #f5a083;
+}
+
+.submit {
+  margin: 2rem .5rem;
+  border: 0;
+  background-color: #00b100;
+  color: rgb(247, 247, 247);
+  padding: 0.7rem 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  width: 80%;
+}
+.submit:hover {
+  background-color: #41ac50;
+}
+
+.name,
+.telephone,
+.occupation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+textarea {
+  width: 100%;
+  height: 20vh;
+  padding: 0.2rem 0.7rem;
+  margin: 0.5rem 1rem;
+  border-radius: 5px;
+  border: #44444431 solid 1px;
+  color: #444444;
+}
+
+.bottombutton{
+    display: flex;
+    width: 100%;
+    
+}
+.cancel{
+    margin: 2rem 0.5rem;
+    border: 0;
+    background-color: #f45252;
+    color: rgb(247, 247, 247);
+    padding: 0.7rem 1rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 20%;
+}
+
+.cancel:hover{
+    background-color: #ff2727;
+}
+
+.modal form input {
+    font-size: 1.2rem;
+    color: #444444;
+    padding: 0.2rem 0.7rem;
+    margin: 0.5rem 1rem;
+    border-radius: 5px;
+    border: #44444431 solid 1px;
+    width: 100%;
+  }
