@@ -7,8 +7,8 @@
   /* background-color: #f5e6be; */
   /* background-color: #fcf8ee; */
   /* background-color: #ffffff; */
-  background-color: #f8d7cb;
-  font-family: 'Montserrat', sans-serif;
+  background-color: #f1f1f162;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -21,14 +21,13 @@
   top: 0;
   background-color: white;
   width: 100vw;
-  box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 12px 24px -12px rgba(4, 0, 39, 0.1);
+  -webkit-box-shadow: 0px 12px 24px -12px rgba(4, 0, 39, 0.1);
 }
 
 @media only screen and (min-width: 768px) {
-  .header{
+  .header {
     position: relative;
-
   }
 }
 
@@ -58,10 +57,14 @@
   width: 100vw;
   height: 100vh;
 }
+.ul{
+  margin-top: 3rem;
+}
+
 .showprofile {
   display: flex;
   height: 100vh;
-  width: 20rem;
+  width: 15rem;
   background-color: white;
   position: absolute;
   top: 0;
@@ -69,29 +72,56 @@
   animation: 0.5s ease-out 0s 1 slidein;
 }
 
+.hr {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0;
+  border: 1px solid #4d4d4dd3;
+}
+
 .showprofile li {
-  font-size: 2rem;
-  padding: 2rem .5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 1rem 0.5rem;
   list-style: none;
   cursor: pointer;
   text-decoration: 1px solid transparent;
-  transition: text-decoration .5s;
+  transition: text-decoration 0.5s;
 }
 
-.showprofile li:hover{
-  
+.showprofile li:hover {
   text-decoration: underline;
   text-underline-offset: 1rem;
 }
 
-.showprofile img{
-  height: 3rem;
+.showprofile svg {
+  height: 2rem;
   width: auto;
   position: absolute;
-  right: 30px;
-  top: 10px;
+  right: 1rem;
+  top: 1rem;
   cursor: pointer;
 }
+
+
+.signout {
+  font-size: 1rem;
+  width: 100%;
+  border: 0;
+  margin-top: 1rem;
+  padding: .6em;
+  border-radius: .5rem;
+  background-color: #e76f51;
+  color: white;
+  cursor: pointer;
+}
+
+.signout:hover {
+  background-color: #f4a261;
+}
+
+
+
 
 @keyframes slidein {
   from {
@@ -102,15 +132,14 @@
   }
 }
 
-.loading{
+.loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  height: 100vh;
 }
-.loading p{
+.loading p {
   margin: 0;
   padding: 0;
 }
-

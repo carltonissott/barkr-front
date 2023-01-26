@@ -2,13 +2,53 @@ import {
   faArrowRight,
   faPhone,
   faPerson,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useRef } from "react";
+import { createRef, useState } from "react";
+import { useParams } from "react-router";
 import style from "./content.module.css";
 
 const Content = (props) => {
   const [contentType, setContentType] = useState();
+
+  const params = useParams();
+
+  const idRef = createRef();
+
+  const elementRef = useRef(props.data.bullets.map(() => createRef()));
+
+  const removeContent = async (id) => {
+    const graphqlQuery = {
+      query: `
+          mutation{deleteContent(petId:"${params.petId}", contentId:"${id}" )
+          }
+          `,
+    };
+    const response = await fetch("http://localhost:8080/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(graphqlQuery),
+    });
+    const data = await response.json();
+    props.refreshKey(data);
+  };
+
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    var id;
+    if (props.data.type == "medical" || props.data.type == "misc") {
+      id = props.data._id;
+    } else {
+      id = elementRef.current[e.currentTarget.id].current.id;
+    }
+    removeContent(id);
+  };
+
   return (
     <div>
       {props.data.type == "medical" && (
@@ -16,31 +56,63 @@ const Content = (props) => {
           <h2>Vaccination/Medical Status</h2>
           <ul>
             {props.data.bullets.map((index) => {
-              return <li>{props.data.bullets[0]}</li>;
+              return <li>{index}</li>;
             })}
           </ul>
+          {props.edit && (
+            <button className={style.none} onClick={deleteHandler}>
+              <FontAwesomeIcon className={style.trashvaccine} icon={faTrash} />
+            </button>
+          )}
         </section>
       )}
       {props.data.type == "contact" && (
         <section className={style.contact}>
           <h2>Important Contacts</h2>
-          <ul>
-            <li>
-              <FontAwesomeIcon fixedWidth icon={faPerson} />{" "}
-              {props.data.bullets[0]}
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faPhone} fixedWidth />{" "}
-              {props.data.bullets[1]}
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faArrowRight} fixedWidth />{" "}
-              {props.data.bullets[2]}
-            </li>
-          </ul>
+          <div className={style.contactgrid}>
+            {props.data.bullets.map((e, i) => {
+              return (
+                <>
+                  <ul ref={elementRef.current[i]} id={e[3]}>
+                    <li>
+                      <FontAwesomeIcon fixedWidth icon={faPerson} /> {e[0]}
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={faPhone} fixedWidth /> {e[1]}
+                    </li>
+                    <li>
+                      <FontAwesomeIcon icon={faArrowRight} fixedWidth /> {e[2]}
+                    </li>
+                    {props.edit && (
+                      <button
+                        className={style.none}
+                        onClick={deleteHandler}
+                        id={i}
+                      >
+                        <FontAwesomeIcon
+                          className={style.trash}
+                          icon={faTrash}
+                        />
+                      </button>
+                    )}
+                  </ul>
+                </>
+              );
+            })}
+          </div>
         </section>
       )}
-      {props.data.type == "misc" && <h2>Misc</h2>}
+      {props.data.type == "misc" && (
+        <section className={style.misc}>
+          <h2>{props.data.bullets[0]}</h2>
+          <p>{props.data.bullets[1]}</p>
+          {props.edit && (
+            <button className={style.none} onClick={deleteHandler}>
+              <FontAwesomeIcon className={style.trashvaccine} icon={faTrash} />
+            </button>
+          )}
+        </section>
+      )}
     </div>
   );
 };

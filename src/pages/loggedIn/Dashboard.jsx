@@ -1,3 +1,5 @@
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Background from "../../components/Background";
@@ -68,6 +70,7 @@ const Dashboard = (props) => {
           return res.json();
         })
         .then((resData) => {
+          console.log(resData);
           setPetArray((prevDat) => {
             return [...prevDat, resData.data.pet];
           });
@@ -82,8 +85,7 @@ const Dashboard = (props) => {
   return (
     <Background>
       <div className={dashboard.main}>
-        <h1>Welcome, {user} </h1>
-        <h2>Your pets:</h2>
+        <h1 className={dashboard.heading}>Welcome, {user} </h1>
 
         {petArray.length !== 0 ? (
           petArray.map((pet) => (
@@ -98,7 +100,7 @@ const Dashboard = (props) => {
           <h2>No pets added! Let's get started!</h2>
         )}
         <button onClick={addPetHandler} className={dashboard.button}>
-          + Add Pet
+          <FontAwesomeIcon icon={faPaw} />  Add Pet
         </button>
       </div>
     </Background>

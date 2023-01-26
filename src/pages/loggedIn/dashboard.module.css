@@ -4,12 +4,19 @@
   margin: 3rem;
   align-items: center;
 }
+
+.heading{
+  font-size: 3rem;
+  color: rgb(4, 0, 39);
+}
+
+
 .button {
-  font-size: 2rem;
+  font-size: 1rem;
   border: 0;
-  margin: 1rem;
-  padding: .2em 2em;
-  border-radius: 20px;
+  margin-top: 1rem;
+  padding: 1em 8em;
+  border-radius: .5rem;
   background-color: #e76f51;
   color: white;
   transition: transform 0.3s;
@@ -17,7 +24,10 @@
   cursor: pointer;
 }
 
+.button svg{
+  margin-right: .3rem;
+}
+
 .button:hover {
   background-color: #f4a261;
-  transform: translateY(-5px);
 }

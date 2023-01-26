@@ -1,3 +1,5 @@
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -35,6 +37,10 @@ const UserBar = () => {
   };
   const myAccountHandler = () => {
     navigate("/dashboard/myprofile"); //navigate to my profile
+  };
+
+  const addPetHandler = () => {
+    navigate("/dashboard/add-pet");
   };
 
   return (
@@ -127,22 +133,23 @@ const UserBar = () => {
           <div className="showprofile">
             {!localStorage.getItem("token") ||
             localStorage.getItem("expiration") < Date.now() ? (
-              <ul>
-                <li onClick={loginHandler}>Login</li>
+              <ul className="ul">
+                <li onClick={addPetHandler}>Register Pet</li>
+                <li>Found Pet</li>
+                <div class="hr" />
+                <li onClick={loginHandler}>Sign In</li>
               </ul>
             ) : (
-              <ul>
+              <ul className="ul">
                 <li onClick={myAccountHandler}>My Account</li>
                 <li onClick={myPetsHandler}>My Pets</li>
-
-                <li onClick={logoutHandler}>Sign Out</li>
+                <div class="hr" />
+                <li onClick={addPetHandler}>Register Pet</li>
+                <li>Found Pet</li>
+                <button class="signout"onClick={logoutHandler}>Sign Out</button>
               </ul>
             )}
-
-            <img
-              onClick={hideProfileHandler}
-              src="https://img.icons8.com/windows/96/null/macos-close.png"
-            />
+            <FontAwesomeIcon onClick={hideProfileHandler} icon={faClose} />
           </div>
         </>
       )}

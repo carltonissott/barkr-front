@@ -1,3 +1,5 @@
+import { faMap, faMapLocation, faMapPin } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Background from "../../components/Background";
@@ -46,24 +48,28 @@ const FoundPet = () => {
   };
   return (
     <Background>
-      <div className={styles.main}>
-        <div className={styles.heading}>
-          <h1>Uh oh! Let's get this pet back home!</h1>
-          <h3>Please enter the code found on the pets collar.</h3>
+      <div className={styles.mainbackground}>
+        <FontAwesomeIcon icon={faMapPin}/>
+        <h1>Let's get this pet back home.</h1>
+
+        <div className={styles.main}>
+          <div className={styles.heading}>
+            <h3>Please enter the code found on the pets collar.</h3>
+          </div>
+          <form onSubmit={findPetHandler}>
+            <label htmlFor="pettag" hidden>
+              Pet Tag ID Code:
+            </label>
+            <input
+              type="text"
+              id="pettag"
+              placeholder="Ex. 9445S4Fw542"
+              required
+            />
+            {alert && <p className={styles.alert}>{alert}</p>}
+            <button type="submit">Submit</button>
+          </form>
         </div>
-        <form onSubmit={findPetHandler}>
-          <label htmlFor="pettag" hidden>
-            Pet Tag ID Code:
-          </label>
-          <input
-            type="text"
-            id="pettag"
-            placeholder="Ex. 9445S4Fw542"
-            required
-          />
-          {alert && <p className={styles.alert}>{alert}</p>}
-          <button type="submit">Submit</button>
-        </form>
       </div>
     </Background>
   );

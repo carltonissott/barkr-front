@@ -37,7 +37,6 @@
   font-weight: 500;
   /* color: #444444; */
   color: white;
-
 }
 
 .contact {
@@ -46,18 +45,66 @@
   position: relative;
 }
 
+.contactgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
 .contact ul {
-    width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   /* border: #ffb7b7 solid 5px; */
-  background-color: #ff7272 ;
+  background-color: #ff7272;
   border-radius: 1rem;
   list-style: none;
   font-size: 1.2rem;
   padding: 0;
-  box-shadow: 10px 10px 63px 0px rgba(248,215,203, .5);
+  box-shadow: 10px 10px 63px 0px rgba(248, 215, 203, 0.5);
+}
 
+.trash {
+  color: #ffcdcd;
+  padding: 1rem;
+}
+.trash:hover {
+  cursor: pointer;
+  color: white;
+}
+.none {
+  border: 0;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.vaccination .none {
+  padding: .5rem 0 1rem;
+  float: right;
+  cursor: pointer;
+}
+
+.vaccination .none:hover{
+  color: #db0000;
+}
+.misc{
+  margin: 2rem;
+  padding: 1rem;
+  position: relative;
+  background-color: white;
+  border-radius: 1rem;
+}
+.misc .none {
+  position: absolute;
+  padding: .5rem 0 1rem;
+  right: 1rem;
+  bottom: .2rem;
+  cursor: pointer;
+}
+
+.misc .none:hover{
+  color: #db0000;
 }

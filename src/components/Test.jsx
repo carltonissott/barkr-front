@@ -1,5 +1,7 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
+import googleAPI from "../API";
+
 
 const Test = ({ text }) => <div>{text}</div>;
 
@@ -15,7 +17,7 @@ export default function SimpleMap() {
     // Important! Always set the container height explicitly
     <div style={{ height: "100%", width: "100%"}}>
       <GoogleMapReact
-        bootstrapURLKeys={{key: ""}}
+        bootstrapURLKeys={{key: googleAPI}}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         yesIWantToUseGoogleMapApiInternals

@@ -4,24 +4,44 @@
   align-items: center;
   border-radius: 20px;
   flex-direction: column;
-  font-size: .9rem;
-  margin: 1rem;
+  font-size: 0.9rem;
+  padding: 0;
+  box-shadow: rgba(149, 157, 165, 0.082) 0px 8px 24px;
+  width: 90%;
 }
 
-.main h1 {
-  font-size: 3em;
-  margin: 2rem 2rem 0rem;
+.mainbackground {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+}
+.mainbackground svg{
+  color: #e76f51;
+  font-size: 4rem;
+}
+
+.mainbackground h1 {
+  font-size: 2.5em;
+  margin: 0;
+  padding: 1.5rem;
 }
 
 .main h3 {
-  font-size: 1.7em;
-  font-weight: 300;
-  margin: 0rem 2rem 0rem;
-
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0 1rem;
+  color: #484848;
 }
 .main input {
-  margin: 1rem;
-  width: 95%;
+  border-color: #484848;
+  border: thin solid #4848485d;
+  width: 90%;
+
+  box-shadow: rgba(0, 0, 0, 0.027) 0px 1px 4px;
 }
 
 .main form {
@@ -31,21 +51,19 @@
   padding: 0 3rem;
 }
 .main form button {
-  font-size: 2rem;
+  font-size: 1rem;
   width: 100%;
   border: 0;
-  padding: 0.5em;
-  border-radius: 20px;
+  margin: 1rem;
+  padding: 0.6em;
+  border-radius: 0.5rem;
   background-color: #e76f51;
   color: white;
   cursor: pointer;
-  transition: transform 0.3s;
-  margin: 1rem 0;
 }
 
 .main form button:hover {
   background-color: #f4a261;
-  transform: translateY(-20px);
 }
 
 .alert {
@@ -57,11 +75,10 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .main{
+  .main {
     font-size: 1rem;
-  margin: 2rem;
-  padding: 2rem;
-
-
+    margin: 2rem;
+    padding: 2rem;
+    width: auto;
   }
 }

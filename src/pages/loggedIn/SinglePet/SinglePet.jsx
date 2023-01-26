@@ -18,26 +18,30 @@ import {
   faAdd,
   faSignature,
   faCat,
+  faDog,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import AddSection from "../../../components/AddSection";
 import Content from "../../../components/Content";
+import { createRef } from "react";
 
 const SinglePet = () => {
   const params = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [petData, setPetData] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   const [editing, setEditing] = useState(false);
   const [modal, setModal] = useState(false);
   const [petContent, setPetContent] = useState([]);
-  const [updatedPetContent, setUpdatedPetContent] = useState()
+  const [age, setAge] = useState(null);
 
   useEffect(() => {
     fetchPet();
-   
-
   }, [PetPageField, refreshKey]);
+
+  const updateRefreshKey = (e) => {
+    setRefreshKey(refreshKey + 1);
+  };
 
   const navigate = useNavigate();
 
@@ -50,6 +54,9 @@ const SinglePet = () => {
               image
               description
               type
+              breed
+              gender
+              birth
               content{
                 _id
               }
@@ -66,18 +73,31 @@ const SinglePet = () => {
     });
     const data = await response.json();
     setPetData(data.data.pet);
+    const birthDate = new Date(data.data.pet.birth);
+    const todayDate = new Date();
+    var years =
+      Math.floor((todayDate - birthDate) / 31556952000) + " years old";
+    if (Math.floor((todayDate - birthDate) / 31556952000) == 0) {
+      years = Math.floor((todayDate - birthDate) / 2629800000) + " months old";
+    }
+    setAge(years);
     fetchContent(data.data.pet.content);
-    
-    setIsLoading(false);
+    const timer1 = setTimeout(() => setIsLoading(false), 500);
+    return () => {
+      clearTimeout(timer1);
+      setIsLoading(false);
+    };
   };
 
-  const fetchContent = async (content) => {
+  const fetchContent = (content) => {
+    var array = [];
     const fetchPetContent = async (element) => {
       const graphqlQuery = {
         query: `
               {content(id:"${element._id}"){
               type
               bullets
+              _id
               }}
               `,
       };
@@ -90,62 +110,50 @@ const SinglePet = () => {
         body: JSON.stringify(graphqlQuery),
       });
       const data = await response.json();
-      setPetContent((prevInfo) => {
-        return [...prevInfo, data.data];
-      });
+      const i = array.findIndex((e) => e.content.type == "contact");
+      if (i > -1 && data.data.content.type == "contact") {
+        const tempArray = data.data.content.bullets;
+        tempArray.push(data.data.content._id);
+        array[i].content.bullets.push(tempArray);
+        // );
+      } else if (data.data.content.type == "contact") {
+        const tempArray = data.data.content.bullets;
+        tempArray.push(data.data.content._id);
+        array.push({
+          content: {
+            type: "contact",
+            bullets: [tempArray],
+          },
+        });
+      } else {
+        array.push(data.data);
+      }
+      console.log(array);
+      setPetContent(array);
     };
     content.forEach((element) => {
       fetchPetContent(element);
     });
-   
-  };
-
-  const multipleContentCheck = async () => {
-    const contentCheck = petContent.filter((element) => {
-      //checks how many are contact
-      return element.content.type == "contact";
-    });
-    var multipleArray = [];
-    var finalCopy = [];
-    const shallowCopy = petContent; //creates shallow copy of petContent
-    if (contentCheck.length > 0) {
-      //if contact exists, combine each contact bullets into one
-      contentCheck.forEach((element) => {
-        element.content.bullets.forEach((ele) => {
-          multipleArray.push(ele);
-        });
-      });
-
-      shallowCopy.forEach((element) => {
-        if (element.content.type == "contact") {
-          const i = shallowCopy.indexOf(element);
-          finalCopy = shallowCopy.splice(i, 1);
-        }
-      });
-      const contact = {
-        //working
-        content: {
-          type: "contact",
-          bullets: multipleArray,
-        },
-      };
-      finalCopy.push(contact);
-      setUpdatedPetContent(finalCopy);
-    }
   };
 
   const updatePetHandler = (e) => {
-    const desiredField = e.target[0].id; //takes id to know what to mutate
-    console.log(desiredField);
     e.preventDefault();
-    const updated = e.target[0].value; // takes value from first input only
+    var gender = "female";
+    if (e.target[3].checked) {
+      gender = "male";
+    }
     const graphqlQuery = {
       query: `
       mutation{
         updatePet(
           id:"${params.petId}",
           petInput:{
-          ${desiredField}: "${updated}"
+          name: "${e.target[2].value}"
+          gender:"${gender}"
+          birth:"${calRef.current.value}"
+          breed: "${e.target[5].value}"
+          description: "${e.target[7].value}"
+      
         }){
           description
         }
@@ -163,28 +171,24 @@ const SinglePet = () => {
       });
       const updatedDescription = await updated.json();
       setRefreshKey(refreshKey + 1);
-      setIsEditing(false);
+      setEditing(false);
     };
     updateDatabase();
   };
 
-  const changeImageHandler = () => {
-    setIsEditing(true);
-  };
 
   const refreshHandler = (e) => {
     fetchPet();
   };
 
-  const submitImageHandler = async (e) => {
+  const uploadImageHandler = async (e) => {
     e.preventDefault();
     console.log(e);
-    if (!e.target[0].files[0]) {
-      setIsEditing(false);
+    if (!e.target.files[0]) {
       return;
     }
     const formData = new FormData();
-    formData.append("image", e.target[0].files[0]);
+    formData.append("image", e.target.files[0]);
     const imageUrl = await fetch("http://localhost:8080/post-image", {
       method: "POST",
       headers: {
@@ -215,7 +219,6 @@ const SinglePet = () => {
       },
       body: JSON.stringify(graphqlQuery),
     });
-    setIsEditing(false);
     setRefreshKey(refreshKey + 1);
   };
 
@@ -240,7 +243,11 @@ const SinglePet = () => {
 
   const editModeHandler = (e) => {
     e.preventDefault();
-    setEditing(true);
+    if (editing) {
+      setEditing(false);
+    } else {
+      setEditing(true);
+    }
   };
 
   const openModal = (e) => {
@@ -252,12 +259,16 @@ const SinglePet = () => {
     setModal(e);
   };
 
-  const testFunctio = () => {
-    console.log(updatedPetContent);
+  const testFunctio = (e) => {
+    e.preventDefault();
+    console.log(calRef.current.value);
   };
+
+  const calRef = createRef();
 
   useAuth();
 
+  
   return (
     <>
       <UserBar />
@@ -275,12 +286,12 @@ const SinglePet = () => {
                       <button onClick={editModeHandler}>
                         <FontAwesomeIcon icon={faEdit} />
                       </button>
-                      <button onClick={testFunctio}>
+                      <button onClick={deletePetHandler}>
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
                     </div>
                     <div className={style.profilepic}>
-                      <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/153558006-tips-healthy-cat-632x475-390x293.jpg" />{" "}
+                      <img src={`${petData.image}`} />
                     </div>
                   </div>
                   <div className={style.basicdetails}>
@@ -289,21 +300,39 @@ const SinglePet = () => {
                         <h3>{petData.name} </h3>
                       </div>
                       <div className={style.sex}>
-                        <img src="https://img.icons8.com/color/96/null/male.png" />
+                        {petData.gender == "male" && (
+                          <FontAwesomeIcon icon={faMars} />
+                        )}
+                        {petData.gender == "female" && (
+                          <FontAwesomeIcon icon={faVenus} />
+                        )}
                       </div>
                       <div className={style.breed}>
-                        <img src="https://img.icons8.com/ios-glyphs/90/999999/pet-commands-train.png" />
-                        <h3>Tabby </h3>
+                        {petData.type == "dog" && (
+                          <FontAwesomeIcon icon={faDog} />
+                        )}
+                        {petData.type == "cat" && (
+                          <FontAwesomeIcon icon={faCat} />
+                        )}
+
+                        {/* <img src="https://img.icons8.com/ios-glyphs/90/999999/pet-commands-train.png" /> */}
+                        <h3>{petData.breed} </h3>
                       </div>
                       <div className={style.age}>
-                        <h3>1 year old</h3>
+                        <h3>{age}</h3>
                       </div>
                     </div>
                     <h2>About Pet</h2>
                     <p>{petData.description}</p>
                   </div>
                   {petContent.map((element) => {
-                    return <Content key={element} data={element.content} />;
+                    return (
+                      <Content
+                        key={element}
+                        data={element.content}
+                        edit={editing}
+                      />
+                    );
                   })}
 
                   <div className={style.lightpink}>
@@ -332,19 +361,33 @@ const SinglePet = () => {
                 </>
               ) : (
                 <>
-                  {modal && <AddSection status={closeModal} />}
-                  <form className={style.editForm}>
+                  {modal && (
+                    <AddSection
+                      status={closeModal}
+                      refreshKey={updateRefreshKey}
+                    />
+                  )}
+
+                  <form className={style.editForm} onSubmit={updatePetHandler}>
                     <div className={style.top}>
                       <div className={style.edit}>
                         <button onClick={editModeHandler}>
                           <FontAwesomeIcon icon={faEdit} />
                         </button>
-                        <button>
+                        <button onClick={deletePetHandler}>
                           <FontAwesomeIcon icon={faTrash} />
                         </button>
                       </div>
-                      <div className={style.profilepic}>
-                        <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/153558006-tips-healthy-cat-632x475-390x293.jpg" />{" "}
+                      <div className={style.editprofilepic}>
+                        <div
+                          className={style.editprofilepicicon}
+                        >
+                          <label htmlFor="imageupload">
+                            <FontAwesomeIcon icon={faEdit} />
+                          </label>
+                          <input onChange={uploadImageHandler} type="file" id="imageupload" />
+                        </div>
+                        <img src={`${petData.image}`}/>
                       </div>
                     </div>
                     <div className={style.basicdetails}>
@@ -358,7 +401,12 @@ const SinglePet = () => {
                           <input type="text" defaultValue={petData.name} />
                         </div>
                         <div className={style.sex}>
-                          <input type="radio" name="gender" value="male" />
+                          <input
+                            type="radio"
+                            name="gender"
+                            value="male"
+                            checked
+                          />
                           <FontAwesomeIcon icon={faMars} />
                           <input type="radio" name="gender" value="female" />
                           <FontAwesomeIcon icon={faVenus} />
@@ -369,20 +417,35 @@ const SinglePet = () => {
                             icon={faCat}
                             color="#999999"
                           />
-                          <input type="text" defaultValue={"Tabby"} />
+                          <input type="text" defaultValue={petData.breed} />
                         </div>
                         <div className={style.age}>
-                          <input type="date" />
+                          <input
+                            type="date"
+                            ref={calRef}
+                            defaultValue={petData.birth}
+                          />
                         </div>
                       </div>
                       <h2>About Pet</h2>
                       <div className={style.textbox}>
                         <textarea defaultValue={petData.description} />
                       </div>
+                      <div className={style.updateDiv}>
+                        <button type="submit" className={style.update}>
+                          Update <FontAwesomeIcon icon={faCheck} />
+                        </button>
+                      </div>
                     </div>
                     {petContent.map((element) => {
-                      console.log(element);
-                      return <Content key={element} data={element.content} />;
+                      return (
+                        <Content
+                          key={element}
+                          data={element.content}
+                          edit={editing}
+                          refreshKey={updateRefreshKey}
+                        />
+                      );
                     })}
 
                     <div className={style.addsection}>
@@ -432,43 +495,3 @@ const SinglePet = () => {
 };
 
 export default SinglePet;
-
-// <Background>
-// {isLoading ? (
-//   <p>Is loading...</p>
-// ) : (
-//   <div className={style.background}>
-//     <div className={style.topheader}>
-//       <h1 className={style.h1}>Hi, I'm {petData.name}!</h1>
-//       <div className={style.imagecontainer}>
-//         {isEditing ? (
-//           <div className={style.imagemodal}>
-//             <form
-//               className={style.flex}
-//               onSubmit={submitImageHandler}
-//               encType="multipart/form-data"
-//             >
-//               <input type="file" />
-//               <button type="submit">Submit!</button>
-//             </form>
-//           </div>
-//         ) : (
-//           <div onClick={changeImageHandler} className={style.overlay}>
-//             <img src="https://img.icons8.com/ios-glyphs/90/ffffff/pencil--v1.png" />
-//           </div>
-//         )}
-//         <img className={style.image} src={petData.image} />
-//       </div>
-//     </div>
-//     <PetPageField
-//       title={"Description"}
-//       id={"description"}
-//       description={petData.description}
-//       refresh={refreshHandler}
-//     />
-//     <button className={style.delete} onClick={deletePetHandler}>
-//       Delete Pet
-//     </button>
-//   </div>
-// )}
-// </Background>

@@ -36,11 +36,10 @@ const AddSection = (props) => {
 
   const addSection = async (e) => {
     e.preventDefault();
-    console.log(e);
 
     const type = e.target[0].value;
 
-    var graphqlQuery
+    var graphqlQuery;
 
     if (type == "contact") {
       const name = e.target[1].value;
@@ -60,18 +59,18 @@ const AddSection = (props) => {
             }`,
       };
     } else if (type == "medical") {
-        const length = fieldCount.length + 1
+      const length = fieldCount.length + 1;
 
-        const medicineArray = []
+      const medicineArray = [];
 
-        for (let index = 1; index <length; index++) {
-            medicineArray.push(e.target[index].value) 
-        }
+      for (let index = 1; index < length; index++) {
+        medicineArray.push(e.target[index].value);
+      }
 
-        const stringify = JSON.stringify(medicineArray) //stringify's array
+      const stringify = JSON.stringify(medicineArray); //stringify's array
 
-        graphqlQuery = {
-            query: `
+      graphqlQuery = {
+        query: `
                 mutation{
                     updatePetContent(id:"${params.petId}",
                     content:{
@@ -81,11 +80,7 @@ const AddSection = (props) => {
                         type
                     }
                 }`,
-          };
-
-          console.log(medicineArray)
-    
-
+      };
     } else {
       const title = e.target[1].value;
       const miscbody = e.target[2].value;
@@ -102,7 +97,6 @@ const AddSection = (props) => {
                 }
             }`,
       };
-
     }
 
     const updateDatabase = async () => {
@@ -115,10 +109,10 @@ const AddSection = (props) => {
         body: JSON.stringify(graphqlQuery),
       });
       const updatedContent = await updated.json();
-     closeModal()
+      closeModal();
+      props.refreshKey(1);
     };
     updateDatabase();
-  
   };
 
   return (

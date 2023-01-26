@@ -1,3 +1,5 @@
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 import card from "./petcard.module.css";
 
@@ -16,11 +18,7 @@ const Petcard = (props) => {
         src={`${props.image}`} //need to fix when launched
       />
       <h1 className={card.petName}>{props.petName}</h1>
-      <img
-        className={card.hamburger}
-        alt="hamburger-menu"
-        src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/384/null/external-hamburger-menu-list-with-parallel-navigation-button-basic-regular-tal-revivo.png"
-      />
+      <FontAwesomeIcon icon={faBars} className={card.hamburger}/>
     </div>
   );
 };

@@ -1,6 +1,19 @@
 .form {
   display: flex;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  justify-content: center;
+  box-shadow: rgba(149, 157, 165, 0.082) 0px 8px 24px;
+
 }
+
+.form label{
+  font-size: 1rem;
+  font-weight: 500;
+  color: #484848;
+}
+
 .col1 {
   display: flex;
   flex-direction: column;
@@ -28,10 +41,12 @@ form h1 {
 form input {
   margin: 10px 0;
   border-radius: 5px;
-  border: 0.2px solid black;
   height: 2rem;
   font-size: 1.5rem;
   padding-left: 0.5rem;
+  border-color: #484848;
+  border: thin solid #4848485d;
+  box-shadow: rgba(0, 0, 0, 0.027) 0px 1px 4px;
 }
 
 .invalid {
@@ -46,15 +61,18 @@ form label {
   font-size: 1.5rem;
 }
 .button {
-  font-size: 2rem;
+  font-size: 1rem;
   width: 100%;
   border: 0;
   margin-top: 1rem;
-  padding: 0.2em;
-  border-radius: 20px;
+  padding: .6em;
+  border-radius: .5rem;
   background-color: #e76f51;
   color: white;
   cursor: pointer;
+  box-shadow: rgba(149, 157, 165, 0.082) 0px 8px 24px;
+  transition: all .1s;
+
 }
 
 .button:hover {

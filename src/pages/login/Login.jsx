@@ -5,6 +5,8 @@ import loginPage from "./login.module.css";
 import loading from "../assets/loading.gif";
 import { useNavigate } from "react-router";
 import Loading from "../../components/Loading";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDog } from "@fortawesome/free-solid-svg-icons";
 
 const Login = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,26 +60,32 @@ const Login = (props) => {
       });
   };
 
+  const navigateHandler = ()=>{
+    navigate('/signup/register')
+  }
+
   return (
     <Background>
-      <div className={loginPage.loginForm}>
-        {/* <h1>Login:</h1> */}
-        {isLoading ? (
-         <Loading/>
-        ) : (
-          <form className={loginPage.loginForm} onSubmit={loginHandler}>
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" />
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" />
-            <button className={loginPage.button} type="submit">
-              Login
-            </button>
-          </form>
-        )}
-        <p className={loginPage.paragraph}>
-          Not a user? Sign up <a href="/signup/register">here.</a>
-        </p>
+      <div className={loginPage.signintext}>
+        <FontAwesomeIcon icon={faDog} className={loginPage.icon}/>
+        <h2>Sign in to your account</h2>
+        <p>Or <a onClick={navigateHandler}>sign up for your free account.</a> </p>
+        <div className={loginPage.loginDiv}>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <form className={loginPage.loginForm} onSubmit={loginHandler}>
+              <label htmlFor="email">Email address</label>
+              <input type="email" id="email" />
+              <label htmlFor="password">Password</label>
+              <input type="password" id="password" />
+              <button className={loginPage.button} type="submit">
+                Login
+              </button>
+
+            </form>
+          )}
+        </div>
       </div>
     </Background>
   );

@@ -3,14 +3,18 @@
   display: grid;
   align-items: center;
   border-radius: 20px;
-  grid-template-columns: 1fr 5fr .5fr;
+  grid-template-columns: 1fr 5fr 0.5fr;
   margin: 1rem;
+  color: rgb(4, 0, 39);
   cursor: pointer;
-  transition: all .4s;
+  transition: all 0.4s;
+  border: .1rem solid #eb451c36;
 }
 
-.card:hover{
+.card:hover {
   transform: scale(1.05);
+  border: .1rem solid #eb451ca9;
+
 }
 
 .petName {
@@ -24,7 +28,7 @@
   border-radius: 50px;
 }
 .hamburger {
-  width: 3em;
-  height: 3em;
-  margin: 15px;
+  font-size: 3rem;
+  color: #eb461c;
+  margin: 2rem;
 }
