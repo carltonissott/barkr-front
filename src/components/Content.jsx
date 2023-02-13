@@ -9,13 +9,12 @@ import { useRef } from "react";
 import { createRef, useState } from "react";
 import { useParams } from "react-router";
 import style from "./content.module.css";
+import { v4 as uuidv4 } from "uuid";
 
 const Content = (props) => {
-  const [contentType, setContentType] = useState();
 
   const params = useParams();
 
-  const idRef = createRef();
 
   const elementRef = useRef(props.data.bullets.map(() => createRef()));
 
@@ -50,13 +49,13 @@ const Content = (props) => {
   };
 
   return (
-    <div>
+    <div key={uuidv4()}>
       {props.data.type == "medical" && (
-        <section className={style.vaccination}>
+        <section className={style.vaccination} key={uuidv4()}>
           <h2>Vaccination/Medical Status</h2>
           <ul>
             {props.data.bullets.map((index) => {
-              return <li>{index}</li>;
+              return <li key={uuidv4()}>{index}</li>;
             })}
           </ul>
           {props.edit && (
@@ -67,43 +66,39 @@ const Content = (props) => {
         </section>
       )}
       {props.data.type == "contact" && (
-        <section className={style.contact}>
+        <section className={style.contact} key={uuidv4()}>
           <h2>Important Contacts</h2>
           <div className={style.contactgrid}>
             {props.data.bullets.map((e, i) => {
               return (
-                <>
-                  <ul ref={elementRef.current[i]} id={e[3]}>
-                    <li>
-                      <FontAwesomeIcon fixedWidth icon={faPerson} /> {e[0]}
-                    </li>
-                    <li>
-                      <FontAwesomeIcon icon={faPhone} fixedWidth /> {e[1]}
-                    </li>
-                    <li>
-                      <FontAwesomeIcon icon={faArrowRight} fixedWidth /> {e[2]}
-                    </li>
-                    {props.edit && (
-                      <button
-                        className={style.none}
-                        onClick={deleteHandler}
-                        id={i}
-                      >
-                        <FontAwesomeIcon
-                          className={style.trash}
-                          icon={faTrash}
-                        />
-                      </button>
-                    )}
-                  </ul>
-                </>
+                <ul ref={elementRef.current[i]} id={e[3]} key={uuidv4()}>
+                  <li>
+                    <FontAwesomeIcon fixedWidth icon={faPerson} /> {e[0]}
+                  </li>
+                  <li>
+                    <FontAwesomeIcon icon={faPhone} fixedWidth />{" "}
+                    <a href={"tel:" + e[1]}>{e[1]}</a>
+                  </li>
+                  <li>
+                    <FontAwesomeIcon icon={faArrowRight} fixedWidth /> {e[2]}
+                  </li>
+                  {props.edit && (
+                    <button
+                      className={style.none}
+                      onClick={deleteHandler}
+                      id={i}
+                    >
+                      <FontAwesomeIcon className={style.trash} icon={faTrash} />
+                    </button>
+                  )}
+                </ul>
               );
             })}
           </div>
         </section>
       )}
       {props.data.type == "misc" && (
-        <section className={style.misc}>
+        <section className={style.misc} key={uuidv4()}>
           <h2>{props.data.bullets[0]}</h2>
           <p>{props.data.bullets[1]}</p>
           {props.edit && (
@@ -118,11 +113,3 @@ const Content = (props) => {
 };
 
 export default Content;
-
-{
-}
-{
-  /* <div className={style.editdeleteicons}>
-<FontAwesomeIcon icon={faTrash} />
-</div> */
-}

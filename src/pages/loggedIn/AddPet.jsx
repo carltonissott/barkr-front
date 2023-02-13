@@ -1,31 +1,91 @@
-import { useEffect } from "react";
+import {
+  faAdd,
+  faCat,
+  faCheck,
+  faDog,
+  faFemale,
+  faMale,
+  faUpload,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router";
 import Background from "../../components/Background";
+import Loading from "../../components/Loading";
 import useAuth from "../../hooks/useAuth";
 import addpet from "./addpet.module.css";
 
 const AddPet = () => {
   const navigate = useNavigate();
 
-  useAuth()
+  const inputFile = useRef(null);
 
+  useAuth();
 
+  const [formPage, setFormPage] = useState(1);
 
-  const addPetHandler = async (e) => {
+  const nextPageHandler = () => {
+    setFormPage(formPage + 1);
+  };
+  const previousPageHandler = () => {
+    setFormPage(formPage - 1);
+  };
+
+  const petNameHandler = (e) => {
+    setPetName(e.target.value);
+  };
+
+  const [formInfo, setFormInfo] = useState({ type: "cat" });
+
+  const [selected, setSelected] = useState();
+
+  const typePetHandler = (e) => {
+    setSelected(e.target.value);
+    setFormInfo({ ...formInfo, type: e.target.value });
+  };
+
+  const breedHandler = (e) => {
+    console.log(formInfo);
+    setFormInfo({ ...formInfo, breed: e.target.value });
+  };
+
+  const sexHandler = (e) => {
+    setSelected(e.target.value);
+    setFormInfo({ ...formInfo, gender: e.target.value });
+    console.log(formInfo);
+  };
+
+  const descriptionHandler = (e) => {
+    setFormInfo({ ...formInfo, description: e.target.value });
+  };
+
+  const dateHandler = (e) => {
+    setFormInfo({ ...formInfo, birth: e.target.value });
+    console.log(formInfo);
+  };
+
+  const idHandler = (e) => {
+    setFormInfo({ ...formInfo, id: e.target.value });
+  };
+
+  const imageUploadHandler = (e) => {
+    inputFile.current.click();
+  };
+
+  const imageUploadComplete = (e) => {
+    setImage(e.target.files[0]);
+    setFileUploaded(true);
+  };
+  const [imageState, setImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const submitFormHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    let type;
-    if (e.target[0].checked) {
-      type = "cat";
-    } else if (e.target[1].checked) {
-      type = "dog";
-    } else {
-      type = "other";
-    }
 
     const formData = new FormData();
-    console.log(e.target[4].value);
-    console.log(e);
-    formData.append("image", e.target[4].files[0]);
+    formData.append("image", imageState);
     const imageUrl = await fetch("http://localhost:8080/post-image", {
       method: "POST",
       headers: {
@@ -36,15 +96,22 @@ const AddPet = () => {
     const decoded = await imageUrl.json();
     const image = await decoded.filePath.replace(/\\/g, "/");
     console.log(`"${image}"`);
+    //uploads rest of data
+
+    const description = formInfo.description;
+
     const graphqlQuery = {
       query: `
         mutation{
             createPet(petInput:{
-                name: "${e.target[3].value}"
-                phone:"${e.target[6].value}"
+                name: "${petName}"
                 image: "${image}"
-                type: "${type}"
-                description: "${e.target[7].value}"
+                type: "${formInfo.type}"
+                gender: "${formInfo.gender}"
+                birth:"${formInfo.birth}"
+                barkrid:"${formInfo.id}"
+                breed: "${formInfo.breed}"
+                description:"""${description}"""
             }){
                 breed
             }
@@ -52,6 +119,7 @@ const AddPet = () => {
         
         `,
     };
+    console.log(graphqlQuery);
     const res = await fetch("http://localhost:8080/graphql", {
       method: "POST",
       headers: {
@@ -60,44 +128,272 @@ const AddPet = () => {
       },
       body: JSON.stringify(graphqlQuery),
     });
+    setIsLoading(false);
     await res.json();
     await navigate("/dashboard");
   };
 
+  const [fileUploaded, setFileUploaded] = useState(false);
+  const [petName, setPetName] = useState("your pet");
+
   return (
     <Background>
-      <div className={addpet.flex}>
-        <h1>Add pet:</h1>
-        <form className={addpet.flex} onSubmit={addPetHandler} encType="multipart/form-data">
-          <div className={addpet.radiobuttons}>
-            <label htmlFor="cat">
-              <img src="https://img.icons8.com/ios/100/null/cat-head--v1.png" />
-            </label>
-            <input id="cat" type="radio" value="Cat" name="type" />
-            <label htmlFor="dog">
-              <img src="https://img.icons8.com/ios/100/null/wolf.png" />
-            </label>
-            <input id="dog" type="radio" value="Dog" name="type" />
-            <label htmlFor="other">
-              <img src="https://img.icons8.com/ios/100/null/frog-face--v2.png" />
-            </label>
-            <input id="other" type="radio" value="Other" name="type" />
-          </div>
-          <label htmlFor="petName">Pet Name:</label>
-          <input id="petName" type="text" />
-          <label htmlFor="petphoto">Upload pet portrait!</label>
-          <input type="file" id="petphoto" />
-          <label htmlFor="address">Street Address:</label>
-          <input id="address" type="text" />
-          <label htmlFor="phone">Phone Number:</label>
-          <input id="phone" type="tel" />
-          <label htmlFor="description">Description:</label>
-          <textarea rows="5" cols="33" id="description"></textarea>
-          <button className={addpet.button} type="submit">
-            +Add Pet!
-          </button>
-        </form>
-      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className={addpet.flex}>
+          {formPage == 1 && (
+            <>
+              <h1>Let's add your pet!</h1>
+              <p>Please have your BarkR Tag # ready.</p>
+              <button className={addpet.button} onClick={nextPageHandler}>
+                Next
+              </button>
+            </>
+          )}
+          {formPage == 2 && (
+            <>
+              <h1>First, let's get your pet's name!</h1>
+              <label htmlFor="petName" hidden>
+                Pet Name:
+              </label>
+              <input
+                type="text"
+                id="petName"
+                onChange={petNameHandler}
+                placeholder="Spoilt Pink Princess III"
+                required
+              />
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={nextPageHandler}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+          {formPage == 3 && (
+            <>
+              <h1>What type of animal is {petName}?</h1>
+              <div className={addpet.radio}>
+                <label
+                  htmlFor="dog"
+                  className={selected == "dog" && "selected"}
+                >
+                  <FontAwesomeIcon icon={faDog} />
+                </label>
+                <input
+                  onClick={typePetHandler}
+                  type="radio"
+                  id="dog"
+                  name="pettype"
+                  value="dog"
+                  hidden
+                ></input>
+                <label
+                  htmlFor="cat"
+                  className={selected == "cat" && "selected"}
+                >
+                  <FontAwesomeIcon icon={faCat} />
+                </label>
+                <input
+                  onClick={typePetHandler}
+                  type="radio"
+                  id="cat"
+                  name="pettype"
+                  value="cat"
+                  hidden
+                ></input>
+                <label
+                  htmlFor="misc"
+                  className={selected == "misc" && "selected"}
+                >
+                  <FontAwesomeIcon icon={faAdd} />
+                </label>
+                <input
+                  onClick={typePetHandler}
+                  type="radio"
+                  id="misc"
+                  name="pettype"
+                  value="misc"
+                  hidden
+                />
+              </div>
+
+              {formInfo.type !== "cat" && formInfo.type !== "dog" && (
+                <>
+                  <label htmlFor="type">Type of animal:</label>
+                  <input
+                    onChange={typePetHandler}
+                    id="type"
+                    type="text"
+                    placeholder="T-Rex"
+                  />
+                </>
+              )}
+
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={nextPageHandler}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+          {formPage == 4 && (
+            <>
+              <h1>Awesome! What breed is {petName}?</h1>
+              <input
+                onChange={breedHandler}
+                type="text"
+                placeholder="Half Dragon, Half Dog"
+              />
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={nextPageHandler}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+          {formPage == 5 && (
+            <>
+              <h1>Is {petName} a boy or a girl?</h1>
+              <div className={addpet.radio}>
+                <label
+                  htmlFor="male"
+                  className={selected == "male" && "selected"}
+                >
+                  <FontAwesomeIcon icon={faMale} />
+                </label>
+                <input
+                  onClick={sexHandler}
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  hidden
+                />
+                <label
+                  htmlFor="female"
+                  className={selected == "female" && "selected"}
+                >
+                  <FontAwesomeIcon icon={faFemale} />
+                </label>
+                <input
+                  onClick={sexHandler}
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="female"
+                  hidden
+                />
+              </div>
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={nextPageHandler}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+          {formPage == 6 && (
+            <>
+              <h1>Let's see a picture of {petName}</h1>
+              <label htmlFor="imageupload">
+                {!fileUploaded ? (
+                  <button
+                    className={addpet.imageupload}
+                    onClick={imageUploadHandler}
+                  >
+                    <FontAwesomeIcon icon={faUpload} /> Choose Image
+                  </button>
+                ) : (
+                  <button
+                    className={addpet.imageupload}
+                    onClick={imageUploadHandler}
+                  >
+                    <FontAwesomeIcon icon={faCheck} /> Uploaded
+                  </button>
+                )}
+              </label>
+              <input
+                onInput={imageUploadComplete}
+                ref={inputFile}
+                type="file"
+                id="imageupload"
+                accept="image/png, image/jpeg"
+              />
+
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={nextPageHandler}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+          {formPage == 7 && (
+            <>
+              <h1>Tell us a little more about {petName}</h1>
+              <textarea
+                onChange={descriptionHandler}
+                className={addpet.textarea}
+                placeholder="Rufus is a very friendly cat and never gets into trouble. He absolutely would never ever thinking of jumping on the counter. Or eating my shoe. Or eating a whole pork chop off the dinner table after I spent 5 hours making it. Never."
+              />
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={nextPageHandler}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+
+          {formPage == 8 && (
+            <>
+              <h1>When was {petName} born?</h1>
+              <input onChange={dateHandler} type="date" />
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={nextPageHandler}>
+                  Next
+                </button>
+              </div>
+            </>
+          )}
+
+          {formPage == 9 && (
+            <>
+              <h1>Last question! What is your BarkR Pet ID Number?</h1>
+              <input onChange={idHandler} type="text" placeholder="4377FaVs2" />
+
+              <div className={addpet.buttons}>
+                <button className={addpet.back} onClick={previousPageHandler}>
+                  Back
+                </button>
+                <button className={addpet.next} onClick={submitFormHandler}>
+                  Register
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </Background>
   );
 };

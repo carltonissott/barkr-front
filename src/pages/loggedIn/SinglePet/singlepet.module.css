@@ -2,6 +2,12 @@
   background-color: rgb(252, 252, 252);
 }
 
+.background {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .top {
   background-color: #f8d7cb;
   background-image: url(../../assets/pawprints.png);
@@ -14,13 +20,13 @@
 }
 .profilepic {
   width: 70%;
-  aspect-ratio: 1 / 1;
   margin: 5rem 0 2rem;
   display: flex;
   justify-content: center;
 }
 .profilepic img {
   border-radius: 50%;
+  aspect-ratio: 1 / 1;
   border: 0.5rem solid rgba(0, 0, 0, 0.158);
   height: 100%;
   width: 100%;
@@ -41,6 +47,8 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+  aspect-ratio: 1 / 1;
+
 }
 
 .editprofilepicicon {
@@ -167,9 +175,22 @@
   padding: 1rem;
 }
 
+.mapsection h3 {
+  color: #1f1f1f;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.7rem 0;
+  margin: 0;
+}
+.mapsection svg {
+  font-size: 1rem;
+  padding: 0 0.5rem;
+  color: #1f1f1fe0;
+}
+
 .mapbox {
   background-color: white;
-  padding: 2rem;
+  padding: 0 2rem 2rem;
   border-radius: 2rem;
   height: 40vh;
 }
@@ -177,39 +198,42 @@
 .contactInfo {
   background-color: black;
   border-radius: 20px;
-  display: grid;
   margin: 2rem;
-  position: sticky;
-  padding: 0 1rem;
+  padding: 0.6rem;
   bottom: 10px;
   color: white;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "icon firstName firstName"
-    "icon phoneNumber city";
+  display: flex;
 }
 .contactInfo h5 {
   font-weight: 400;
-  color: #b3b3b3;
-  margin: 0;
+  color: #dbdbdb;
+  margin: 0.1rem 0;
 }
 .contactInfo h4 {
   margin: 0;
+  font-size: 1.5rem;
+  color: rgb(245, 245, 245);
 }
-
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 0.5rem;
+}
 .icon {
   background-color: #f47b52;
   border-radius: 1rem;
   grid-area: icon;
   margin: 1rem;
-  margin-left: 0.3rem;
   padding: 1rem;
   color: white;
   font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.icon a {
+  color: white;
 }
 .firstName {
   grid-area: firstName;
@@ -218,19 +242,12 @@
   font-size: 1.2rem;
 }
 .phoneNumber {
-  grid-area: phoneNumber;
   display: flex;
   align-items: center;
 }
 
 .city {
-  grid-area: city;
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-  align-items: center;
-  justify-content: center;
-  margin-left: 0.5rem;
-  text-align: center;
+  display: flex;
   gap: 10px;
 }
 
@@ -247,6 +264,7 @@
   margin-bottom: -7rem;
   width: 100%;
   display: flex;
+  z-index: 10;
   align-items: center;
   justify-content: space-between;
 }
@@ -336,10 +354,105 @@
 
 .mapform {
   display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+  align-items: center;
 }
 
 input[type="file"] {
   display: none;
+}
+
+.sidebar {
+  max-width: 400px;
+  background-color: rgb(252, 252, 252);
+  border-radius: 30px;
+  box-shadow: 10px 10px 63px -59px rgba(0, 0, 0, 0.75);
+  padding: 3rem;
+  position: relative;
+}
+.sidebar svg {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 1.3rem;
+  height: 1.1rem;
+  cursor: pointer;
+}
+
+.sidebar h4 {
+  font-size: 1.3rem;
+  padding: 1rem 2rem 0.6rem;
+
+  margin: 0;
+  font-weight: 500;
+}
+.sidebar h5 {
+  font-size: 1rem;
+  padding: 0 2rem;
+  margin: 0;
+  color: #5a5a5a;
+  font-weight: 400;
+}
+
+.notifications {
+  position: relative;
+}
+
+.sidebar input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.sidebar label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 3rem;
+  height: 1.5rem;
+  background: grey;
+  display: block;
+  border-radius: 100px;
+  position: absolute;
+  right: 2rem;
+  bottom: 0rem;
+}
+
+.sidebar label:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 1rem;
+  height: 1rem;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+.sidebar input:checked + label {
+  background: #f45252;
+}
+
+.sidebar input:checked + label:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+.sidebar label:active:after {
+  width: 3rem;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.705);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 12;
 }
 
 @media only screen and (min-width: 768px) {
@@ -349,13 +462,14 @@ input[type="file"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
   }
   .main {
     width: 50%;
   }
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1200px) {
   .background {
     max-width: 100vw;
     background-color: aliceblue;

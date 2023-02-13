@@ -1,0 +1,55 @@
+.dropdown {
+  background-color: white;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  position: absolute;
+  margin: 0;
+  padding: 1rem;
+  width: 90%;
+  top: 3rem;
+}
+
+.dropdown li {
+  list-style: none;
+  padding: 0.2rem;
+  border-top: 1px #f47b5246 solid;
+}
+
+.dropdown li strong {
+  font-weight: 500;
+}
+
+.dropdown li:hover {
+  background-color: aliceblue;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.whole {
+  position: relative;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.whole button {
+  background-color: #f47b52;
+  border: 0;
+  border-radius: 1rem;
+  color: rgb(247, 247, 247);
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.whole button svg {
+  color: rgb(247, 247, 247);
+  font-size: 1.5rem;
+}
+
+.inputbutton {
+  display: flex;
+  align-items: center;
+}

@@ -54,7 +54,7 @@
 .contact ul {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   /* border: #ffb7b7 solid 5px; */
   background-color: #ff7272;
@@ -63,6 +63,15 @@
   font-size: 1.2rem;
   padding: 0;
   box-shadow: 10px 10px 63px 0px rgba(248, 215, 203, 0.5);
+}
+
+.contact ul a{
+  padding: 0;
+  font-weight: 500;
+  /* color: #444444; */
+  text-decoration: none;
+  margin: 0;
+  color: white;
 }
 
 .trash {
@@ -82,15 +91,15 @@
 }
 
 .vaccination .none {
-  padding: .5rem 0 1rem;
+  padding: 0.5rem 0 1rem;
   float: right;
   cursor: pointer;
 }
 
-.vaccination .none:hover{
+.vaccination .none:hover {
   color: #db0000;
 }
-.misc{
+.misc {
   margin: 2rem;
   padding: 1rem;
   position: relative;
@@ -99,12 +108,12 @@
 }
 .misc .none {
   position: absolute;
-  padding: .5rem 0 1rem;
+  padding: 0.5rem 0 1rem;
   right: 1rem;
-  bottom: .2rem;
+  bottom: 0.2rem;
   cursor: pointer;
 }
 
-.misc .none:hover{
+.misc .none:hover {
   color: #db0000;
 }

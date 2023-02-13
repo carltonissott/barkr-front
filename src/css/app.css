@@ -11,13 +11,14 @@
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 .header {
   display: grid;
   grid-template-columns: 1fr 7fr 1fr;
   align-items: center;
-  position: absolute;
+  position: relative;
   top: 0;
   background-color: white;
   width: 100vw;
@@ -56,6 +57,7 @@
   top: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 30;
 }
 .ul{
   margin-top: 3rem;
@@ -70,6 +72,7 @@
   top: 0;
   right: 0;
   animation: 0.5s ease-out 0s 1 slidein;
+  z-index: 40;
 }
 
 .hr {
@@ -142,4 +145,9 @@
 .loading p {
   margin: 0;
   padding: 0;
+}
+
+
+.selected{
+  box-shadow: 0px 0px 32px 0px #ff9640c7;
 }

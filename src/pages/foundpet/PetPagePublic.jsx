@@ -7,6 +7,7 @@ import {
   faVenus,
   faCat,
   faDog,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { createRef } from "react";
 import PetPageField from "../../components/PetPageField";
@@ -14,9 +15,9 @@ import Loading from "../../components/Loading";
 import SimpleMap from "../../components/Test";
 import UserBar from "../../components/UserBar";
 import Content from "../../components/Content";
-import style from '../loggedIn/SinglePet/singlepet.module.css'
+import style from "../loggedIn/SinglePet/singlepet.module.css";
+import custom from "../foundpet/foundpetpublic.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 
 const PetPagePublic = () => {
   const params = useParams();
@@ -25,52 +26,21 @@ const PetPagePublic = () => {
   const [petContent, setPetContent] = useState([]);
   const [age, setAge] = useState(null);
 
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   const getData = async () => {
-  //     const graphqlQuery = {
-  //       query: `
-  //             query{
-  //                 lookupPet(id:"${petId}"){
-  //                   name
-  //                   description
-  //                 }
-  //               }
-  //             `,
-  //     };
-  //     try {
-  //       const response = await fetch("http://localhost:8080/graphql", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(graphqlQuery),
-  //       });
-  //       const petData = await response.json();
-  //       setPetData(petData.data.lookupPet);
-  //       const timer1 = setTimeout(() => setIsLoading(false), 500);
-  //       return () => {
-  //         clearTimeout(timer1);
-  //       };
-  //       return petData;
-  //     } catch (error) {
-  //       setPetData({
-  //         name: "No name found!",
-  //       });
-  //       const timer1 = setTimeout(() => setIsLoading(false), 500);
-  //       return () => {
-  //         clearTimeout(timer1);
-  //       };
-  //     }
-  //   };
-  //   getData();
-  // }, []);
-
   useEffect(() => {
     fetchPet();
   }, [PetPageField]);
 
+  useEffect(() => {
+    if (petData && petData.lost) {
+      setIsLost(true);
+    }
+
+    if (petData && petData.emailNotification) {
+      sendEmail();
+    }
+  }, [petData]);
+
+  const [isLost, setIsLost] = useState();
 
   const navigate = useNavigate();
 
@@ -86,6 +56,8 @@ const PetPagePublic = () => {
               breed
               gender
               birth
+              lost
+              emailNotification
               content{
                 _id
               }
@@ -111,6 +83,7 @@ const PetPagePublic = () => {
     }
     setAge(years);
     fetchContent(data.data.pet.content);
+
     const timer1 = setTimeout(() => setIsLoading(false), 500);
     return () => {
       clearTimeout(timer1);
@@ -157,7 +130,6 @@ const PetPagePublic = () => {
       } else {
         array.push(data.data);
       }
-      console.log(array);
       setPetContent(array);
     };
     content.forEach((element) => {
@@ -165,15 +137,35 @@ const PetPagePublic = () => {
     });
   };
 
+  const sendEmail = () => {
+    const petId = JSON.stringify({ petId: params.petId });
 
+    fetch("http://localhost:8080/email-notification", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      body: petId,
+    });
+  };
 
-
-
+  const closeModal = () => {
+    setIsLost(false);
+  };
 
   return (
     <>
       <UserBar />
-
+      {isLost && (
+        <div className={custom.modal}>
+          <div className={custom.sidebar}>
+            <FontAwesomeIcon icon={faX} onClick={closeModal} />
+            <h4>THIS PET IS MISSING!</h4>
+            <h5>Please contact the owner ASAP at 21 501 4103</h5>
+          </div>
+        </div>
+      )}
       <div className={style.background}>
         {isLoading ? (
           <Loading />
@@ -207,7 +199,6 @@ const PetPagePublic = () => {
                         <FontAwesomeIcon icon={faCat} />
                       )}
 
-                      {/* <img src="https://img.icons8.com/ios-glyphs/90/999999/pet-commands-train.png" /> */}
                       <h3>{petData.breed} </h3>
                     </div>
                     <div className={style.age}>
@@ -222,7 +213,7 @@ const PetPagePublic = () => {
                     <Content
                       key={element}
                       data={element.content}
-                      edit={"false"}
+                      edit={false}
                     />
                   );
                 })}

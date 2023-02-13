@@ -127,7 +127,7 @@
   display: grid;
   margin: 2rem;
   position: sticky;
-  padding: 0 1rem ;
+  padding: 0 1rem;
   bottom: 10px;
   color: white;
   grid-template-columns: 1fr 1fr 1fr;
@@ -150,7 +150,7 @@
   border-radius: 1rem;
   grid-area: icon;
   margin: 1rem;
-  margin-left: .3rem;
+  margin-left: 0.3rem;
   padding: 1rem;
   color: white;
   font-size: 2rem;
@@ -176,9 +176,59 @@
   grid-template-columns: 1fr 6fr;
   align-items: center;
   justify-content: center;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   text-align: center;
   gap: 10px;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.705);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 12;
+}
+
+.sidebar {
+  max-width: 400px;
+  background-color: rgb(252, 252, 252);
+  border-radius: 30px;
+  box-shadow: 10px 10px 63px -59px rgba(0, 0, 0, 0.75);
+  padding: 2rem 3rem 3rem;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sidebar svg {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 2rem;
+  height: 1.1rem;
+  cursor: pointer;
+}
+
+.sidebar h4 {
+  font-size: 2.2rem;
+  padding: 1rem;
+  color: rgb(248, 0, 0);
+  margin: 0;
+  font-weight: 700;
+}
+.sidebar h5 {
+  font-size: 1rem;
+  padding: 0 2rem;
+  margin: 0;
+  color: #5a5a5a;
+  font-weight: 400;
 }
 
 @media only screen and (min-width: 768px) {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Background from "../../components/Background";
 import styles from "../signup/register.module.css";
 import loginPage from "./login.module.css";
@@ -14,6 +14,14 @@ const Login = (props) => {
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("token") &&
+      localStorage.getItem("expiration") > Date.now()
+    ) {
+      navigate("/dashboard");
+    }
+  }, []);
   const loginHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -60,16 +68,18 @@ const Login = (props) => {
       });
   };
 
-  const navigateHandler = ()=>{
-    navigate('/signup/register')
-  }
+  const navigateHandler = () => {
+    navigate("/signup/register");
+  };
 
   return (
     <Background>
       <div className={loginPage.signintext}>
-        <FontAwesomeIcon icon={faDog} className={loginPage.icon}/>
+        <FontAwesomeIcon icon={faDog} className={loginPage.icon} />
         <h2>Sign in to your account</h2>
-        <p>Or <a onClick={navigateHandler}>sign up for your free account.</a> </p>
+        <p>
+          Or <a onClick={navigateHandler}>sign up for your free account.</a>{" "}
+        </p>
         <div className={loginPage.loginDiv}>
           {isLoading ? (
             <Loading />
@@ -82,7 +92,6 @@ const Login = (props) => {
               <button className={loginPage.button} type="submit">
                 Login
               </button>
-
             </form>
           )}
         </div>

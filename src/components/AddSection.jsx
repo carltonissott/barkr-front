@@ -64,7 +64,11 @@ const AddSection = (props) => {
       const medicineArray = [];
 
       for (let index = 1; index < length; index++) {
-        medicineArray.push(e.target[index].value);
+
+        if(e.target[index].value.length > 0 ){
+          medicineArray.push(e.target[index].value)
+        }
+        ;
       }
 
       const stringify = JSON.stringify(medicineArray); //stringify's array
@@ -130,9 +134,9 @@ const AddSection = (props) => {
         <hr />
         {format == "medical" && (
           <>
-            {fieldCount.map((misc) => {
+            {fieldCount.map((misc, index) => {
               return (
-                <div className={style.fieldinput}>
+                <div className={style.fieldinput} key={index}>
                   <FontAwesomeIcon icon={faSyringe} />{" "}
                   <input
                     type="text"

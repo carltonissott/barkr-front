@@ -1,5 +1,11 @@
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { faHome, faMessage, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
+import PlacesAutocomplete from "../../../components/Autocomplete";
+import PlacesAutocompleteProfile from "../../../components/AutocompleteProfiley";
 import Background from "../../../components/Background";
 import Loading from "../../../components/Loading";
 import useAuth from "../../../hooks/useAuth";
@@ -15,6 +21,9 @@ const MyProfile = () => {
     //redirect user to main page
     navigate("/");
   };
+  const [success, setSuccess] = useState(false);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [user, setUser] = useState(null);
   const [updated, setUpdated] = useState(0);
@@ -32,6 +41,8 @@ const MyProfile = () => {
         street
         zip
         tel
+        membership
+        address
     }}
     `,
     };
@@ -54,6 +65,9 @@ const MyProfile = () => {
           clearTimeout(timer1);
         };
       });
+    if (searchParams.get("session_id")) {
+      setSuccess(true);
+    }
   }, [updated]);
 
   const [edit, setEdit] = useState(false);
@@ -125,6 +139,39 @@ const MyProfile = () => {
     deleteUser();
   };
 
+  const editMembership = async (e) => {
+    const res = await fetch("http://localhost:8080/customer-portal", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+    });
+
+    const response = await res.json();
+
+    window.location.href = response.url;
+  };
+
+  const upgradeMembership = async (e) => {
+    const priceId = JSON.stringify({
+      priceId: "price_1MZ0RiIyEliCATcCkgMEjUTF",
+    });
+
+    const res = await fetch("http://localhost:8080/create-checkout-session", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      body: priceId,
+    });
+
+    const response = await res.json();
+
+    window.location.href = response.url;
+  };
+
   return (
     <>
       <Background>
@@ -149,30 +196,55 @@ const MyProfile = () => {
                 <label htmlFor="tel">Telephone:</label>
                 <input type="tel" id="tel" defaultValue={user.tel} />
                 <label htmlFor="street">Street Address:</label>
-                <input type="text" id="street" defaultValue={user.street} />
-                <label htmlFor="zip">Zip Code:</label>
-                <input id="zip" type="text" defaultValue={user.zip} />
+                <PlacesAutocompleteProfile address={user.address} />
+                {/* <label htmlFor="zip">Zip Code:</label>
+                <input id="zip" type="text" defaultValue={user.zip} /> */}
                 <button className={styles.edit} type="submit">
                   Update
                 </button>
               </form>
             ) : (
               <>
+                {success && <h3>You're now a pro member!</h3>}
                 <h2>
                   {user.firstName} {user.lastName}
                 </h2>
-                <p className={styles.text}> {user.email} </p>
-                <p className={styles.text}>{user.tel}</p>
                 <p className={styles.text}>
-                  {user.street} {user.zip}
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  {user.email}
+                </p>
+                <p className={styles.text}>
+                  <FontAwesomeIcon icon={faPhone} />
+                  {user.tel}
+                </p>
+                <p className={styles.text}>
+                  <FontAwesomeIcon icon={faHome} />
+
+                  {user.address}
                 </p>
                 <div className={styles.button}>
+                  {user.membership ? (
+                    <button
+                      onClick={editMembership}
+                      type="submit"
+                      className={styles.upgrade}
+                    >
+                      Edit Membership
+                    </button>
+                  ) : (
+                    <button
+                      onClick={upgradeMembership}
+                      type="submit"
+                      className={styles.upgrade}
+                    >
+                      Upgrade to Pro!
+                    </button>
+                  )}
+
                   <button onClick={editHandler} className={styles.edit}>
                     Edit Profile
                   </button>
-                  <button onClick={logoutHandler} className={styles.logout}>
-                    Log Out
-                  </button>
+
                   <button
                     onClick={deleteAccountHandler}
                     className={styles.delete}
