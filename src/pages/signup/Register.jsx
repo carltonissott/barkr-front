@@ -1,9 +1,7 @@
 import { useRef, useState } from "react";
 import Background from "../../components/Background";
 import styles from "./register.module.css";
-import loading from "../assets/loading.gif";
 import { redirect, useNavigate } from "react-router";
-import PlacesAutocompleteProfile from "../../components/AutocompleteProfiley";
 import dedicated from "../../components/autocompleteprofile.module.css";
 
 import usePlacesAutocomplete, {
@@ -69,8 +67,8 @@ const Register = () => {
       );
     });
 
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
+  const [lat, setLat] = useState("0");
+  const [long, setLong] = useState("0");
   const [address, setAddress] = useState(null);
 
   const onSubmitHandler = (e) => {

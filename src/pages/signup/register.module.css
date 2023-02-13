@@ -8,6 +8,7 @@
 
 }
 
+
 .form label{
   font-size: 1rem;
   font-weight: 500;
@@ -77,4 +78,20 @@ form label {
 
 .button:hover {
   background-color: #f4a261;
+}
+
+
+@media only screen and (max-width: 768px) {
+.form{
+  flex-direction: column;
+  margin: 3rem 3rem 0 3rem;
+}
+
+form h1{
+  margin: 3.5rem ;
+}
+
+.button{
+  width: 100%;
+}
 }

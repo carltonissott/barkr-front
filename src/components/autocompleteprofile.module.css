@@ -33,6 +33,15 @@
   flex-direction: column;
 }
 
+.whole .inputbutton {
+  width: 100%;
+}
+
+.inputbutton input{
+  width: 100%;
+}
+
+
 
 .whole button {
   background-color: #f47b52;
