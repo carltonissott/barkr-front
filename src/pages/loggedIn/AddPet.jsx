@@ -86,7 +86,7 @@ const AddPet = () => {
 
     const formData = new FormData();
     formData.append("image", imageState);
-    const imageUrl = await fetch("http://localhost:8080/post-image", {
+    const imageUrl = await fetch(`${process.env.REACT_APP_API_SERVER}/post-image`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -120,7 +120,7 @@ const AddPet = () => {
         `,
     };
     console.log(graphqlQuery);
-    const res = await fetch("http://localhost:8080/graphql", {
+    const res = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

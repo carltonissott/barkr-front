@@ -55,7 +55,7 @@ const PetPagePublic = () => {
               type
               breed
               gender
-              birth
+              births
               lost
               emailNotification
               content{
@@ -64,7 +64,7 @@ const PetPagePublic = () => {
           }}
           `,
     };
-    const response = await fetch("http://localhost:8080/graphql", {
+    const response = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -103,7 +103,7 @@ const PetPagePublic = () => {
               }}
               `,
       };
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -140,7 +140,7 @@ const PetPagePublic = () => {
   const sendEmail = () => {
     const petId = JSON.stringify({ petId: params.petId });
 
-    fetch("http://localhost:8080/email-notification", {
+    fetch(`${process.env.REACT_APP_API_SERVER}/email-notification`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

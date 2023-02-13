@@ -47,7 +47,7 @@ const MyProfile = () => {
     `,
     };
 
-    fetch("http://localhost:8080/graphql", {
+    fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -99,7 +99,7 @@ const MyProfile = () => {
     };
 
     const updateUser = async () => {
-      const updated = await fetch("http://localhost:8080/graphql", {
+      const updated = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -125,7 +125,7 @@ const MyProfile = () => {
       }`,
     };
     const deleteUser = async () => {
-      const deleted = await fetch("http://localhost:8080/graphql", {
+      const deleted = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -140,7 +140,7 @@ const MyProfile = () => {
   };
 
   const editMembership = async (e) => {
-    const res = await fetch("http://localhost:8080/customer-portal", {
+    const res = await fetch(`${process.env.REACT_APP_API_SERVER}/customer-portal`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -158,7 +158,7 @@ const MyProfile = () => {
       priceId: "price_1MZ0RiIyEliCATcCkgMEjUTF",
     });
 
-    const res = await fetch("http://localhost:8080/create-checkout-session", {
+    const res = await fetch(`${process.env.REACT_APP_API_SERVER}/create-checkout-session`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

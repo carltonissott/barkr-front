@@ -29,7 +29,7 @@ const PetPageField = (prop) => {
     };
     console.log(graphqlQuery);
     const updateDatabase = async () => {
-      const updated = await fetch("http://localhost:8080/graphql", {
+      const updated = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

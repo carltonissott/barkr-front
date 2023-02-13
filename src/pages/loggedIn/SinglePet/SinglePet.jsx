@@ -70,7 +70,7 @@ const SinglePet = () => {
           }}
           `,
     };
-    const response = await fetch("http://localhost:8080/graphql", {
+    const response = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -108,7 +108,7 @@ const SinglePet = () => {
               }}
               `,
       };
-      const response = await fetch("http://localhost:8080/graphql", {
+      const response = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -169,7 +169,7 @@ const SinglePet = () => {
         `,
     };
     const fetchUser = async () => {
-      const updated = await fetch("http://localhost:8080/graphql", {
+      const updated = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -208,7 +208,7 @@ const SinglePet = () => {
           `,
     };
     const updateDatabase = async () => {
-      const updated = await fetch("http://localhost:8080/graphql", {
+      const updated = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -234,7 +234,7 @@ const SinglePet = () => {
     }
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-    const imageUrl = await fetch("http://localhost:8080/post-image", {
+    const imageUrl = await fetch(`${process.env.REACT_APP_API_SERVER}/post-image`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -256,7 +256,7 @@ const SinglePet = () => {
         }
       }`,
     };
-    await fetch("http://localhost:8080/graphql", {
+    await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -283,7 +283,7 @@ const SinglePet = () => {
     };
 
     const updateDatabase = async () => {
-      const updated = await fetch("http://localhost:8080/graphql", {
+      const updated = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -305,7 +305,7 @@ const SinglePet = () => {
         
       }`,
     };
-    await fetch("http://localhost:8080/graphql", {
+    await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

@@ -28,7 +28,7 @@ const Dashboard = (props) => {
         `,
     };
 
-    fetch("http://localhost:8080/graphql", {
+    fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -58,7 +58,7 @@ const Dashboard = (props) => {
                     `,
       };
 
-      fetch("http://localhost:8080/graphql", {
+      fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
