@@ -27,6 +27,7 @@ const AddPet = () => {
 
   const nextPageHandler = () => {
     setFormPage(formPage + 1);
+    console.log(formInfo);
   };
   const previousPageHandler = () => {
     setFormPage(formPage - 1);
@@ -46,14 +47,12 @@ const AddPet = () => {
   };
 
   const breedHandler = (e) => {
-    console.log(formInfo);
     setFormInfo({ ...formInfo, breed: e.target.value });
   };
 
   const sexHandler = (e) => {
     setSelected(e.target.value);
     setFormInfo({ ...formInfo, gender: e.target.value });
-    console.log(formInfo);
   };
 
   const descriptionHandler = (e) => {
@@ -81,21 +80,24 @@ const AddPet = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const submitFormHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("image", imageState);
-    const imageUrl = await fetch(`${process.env.REACT_APP_API_SERVER}/post-image`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: formData,
-    });
+    const imageUrl = await fetch(
+      `${process.env.REACT_APP_API_SERVER}/post-image`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: formData,
+      }
+    );
     const decoded = await imageUrl.json();
     const image = await decoded.filePath.replace(/\\/g, "/");
-    console.log(`"${image}"`);
+
     //uploads rest of data
 
     const description = formInfo.description;
@@ -119,7 +121,6 @@ const AddPet = () => {
         
         `,
     };
-    console.log(graphqlQuery);
     const res = await fetch(`${process.env.REACT_APP_API_SERVER}/graphql`, {
       method: "POST",
       headers: {
@@ -130,7 +131,7 @@ const AddPet = () => {
     });
     setIsLoading(false);
     await res.json();
-    await navigate("/dashboard");
+    navigate("/dashboard");
   };
 
   const [fileUploaded, setFileUploaded] = useState(false);
@@ -141,7 +142,7 @@ const AddPet = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className={addpet.flex}>
+        <form className={addpet.flex}>
           {formPage == 1 && (
             <>
               <h1>Let's add your pet!</h1>
@@ -205,6 +206,7 @@ const AddPet = () => {
                   name="pettype"
                   value="cat"
                   hidden
+                  required
                 ></input>
                 <label
                   htmlFor="misc"
@@ -230,6 +232,7 @@ const AddPet = () => {
                     id="type"
                     type="text"
                     placeholder="T-Rex"
+                    required
                   />
                 </>
               )}
@@ -238,9 +241,19 @@ const AddPet = () => {
                 <button className={addpet.back} onClick={previousPageHandler}>
                   Back
                 </button>
-                <button className={addpet.next} onClick={nextPageHandler}>
-                  Next
-                </button>
+                {formInfo.type ? (
+                  <button className={addpet.next} onClick={nextPageHandler}>
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    className={addpet.next}
+                    onClick={nextPageHandler}
+                    disabled
+                  >
+                    Next
+                  </button>
+                )}
               </div>
             </>
           )}
@@ -251,14 +264,25 @@ const AddPet = () => {
                 onChange={breedHandler}
                 type="text"
                 placeholder="Half Dragon, Half Dog"
+                required
               />
               <div className={addpet.buttons}>
                 <button className={addpet.back} onClick={previousPageHandler}>
                   Back
                 </button>
-                <button className={addpet.next} onClick={nextPageHandler}>
-                  Next
-                </button>
+                {formInfo.breed ? (
+                  <button className={addpet.next} onClick={nextPageHandler}>
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    className={addpet.next}
+                    onClick={nextPageHandler}
+                    disabled
+                  >
+                    Next
+                  </button>
+                )}
               </div>
             </>
           )}
@@ -279,6 +303,7 @@ const AddPet = () => {
                   name="gender"
                   value="male"
                   hidden
+                  required
                 />
                 <label
                   htmlFor="female"
@@ -299,9 +324,19 @@ const AddPet = () => {
                 <button className={addpet.back} onClick={previousPageHandler}>
                   Back
                 </button>
-                <button className={addpet.next} onClick={nextPageHandler}>
-                  Next
-                </button>
+                {formInfo.gender ? (
+                  <button className={addpet.next} onClick={nextPageHandler}>
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    className={addpet.next}
+                    onClick={nextPageHandler}
+                    disabled
+                  >
+                    Next
+                  </button>
+                )}
               </div>
             </>
           )}
@@ -331,6 +366,7 @@ const AddPet = () => {
                 type="file"
                 id="imageupload"
                 accept="image/png, image/jpeg"
+                required
               />
 
               <div className={addpet.buttons}>
@@ -350,14 +386,25 @@ const AddPet = () => {
                 onChange={descriptionHandler}
                 className={addpet.textarea}
                 placeholder="Rufus is a very friendly cat and never gets into trouble. He absolutely would never ever thinking of jumping on the counter. Or eating my shoe. Or eating a whole pork chop off the dinner table after I spent 5 hours making it. Never."
+                required
               />
               <div className={addpet.buttons}>
                 <button className={addpet.back} onClick={previousPageHandler}>
                   Back
                 </button>
-                <button className={addpet.next} onClick={nextPageHandler}>
-                  Next
-                </button>
+                {formInfo.description ? (
+                  <button className={addpet.next} onClick={nextPageHandler}>
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    className={addpet.next}
+                    onClick={nextPageHandler}
+                    disabled
+                  >
+                    Next
+                  </button>
+                )}
               </div>
             </>
           )}
@@ -365,14 +412,24 @@ const AddPet = () => {
           {formPage == 8 && (
             <>
               <h1>When was {petName} born?</h1>
-              <input onChange={dateHandler} type="date" />
+              <input onChange={dateHandler} type="date" required />
               <div className={addpet.buttons}>
                 <button className={addpet.back} onClick={previousPageHandler}>
                   Back
                 </button>
-                <button className={addpet.next} onClick={nextPageHandler}>
-                  Next
-                </button>
+                {formInfo.birth ? (
+                  <button className={addpet.next} onClick={nextPageHandler}>
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    className={addpet.next}
+                    onClick={nextPageHandler}
+                    disabled
+                  >
+                    Next
+                  </button>
+                )}
               </div>
             </>
           )}
@@ -380,19 +437,34 @@ const AddPet = () => {
           {formPage == 9 && (
             <>
               <h1>Last question! What is your BarkR Pet ID Number?</h1>
-              <input onChange={idHandler} type="text" placeholder="4377FaVs2" />
+              <input
+                onChange={idHandler}
+                type="text"
+                placeholder="4377FaVs2"
+                required
+              />
 
               <div className={addpet.buttons}>
                 <button className={addpet.back} onClick={previousPageHandler}>
                   Back
                 </button>
-                <button className={addpet.next} onClick={submitFormHandler}>
-                  Register
-                </button>
+                {formInfo.id ? (
+                  <button className={addpet.next} onClick={submitFormHandler}>
+                    Register
+                  </button>
+                ) : (
+                  <button
+                    className={addpet.next}
+                    onClick={submitFormHandler}
+                    disabled
+                  >
+                    Submit
+                  </button>
+                )}
               </div>
             </>
           )}
-        </div>
+        </form>
       )}
     </Background>
   );

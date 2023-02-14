@@ -28,6 +28,10 @@
   color: rgba(4, 0, 39, 0.582);
   text-align: center;
 }
+.buttons button:disabled{
+  background-color: gray;
+  cursor: not-allowed;
+}
 
 .button {
   font-size: 1rem;
@@ -116,6 +120,10 @@
   .radio{
     padding: 0;
     margin: 2rem 0;
+  }
+
+  .radio label{
+    margin: 0rem;
   }
 
   .textarea{

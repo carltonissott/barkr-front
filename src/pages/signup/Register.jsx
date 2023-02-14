@@ -138,10 +138,8 @@ const Register = () => {
               <div className={styles.col1}>
                 <label htmlFor="firstName">First Name:</label>
                 <input id="firstName" type="text" required />
-                <label htmlFor="lastName" required>
-                  Last Name:
-                </label>
-                <input id="lastName" type="text" />
+                <label htmlFor="lastName">Last Name:</label>
+                <input id="lastName" type="text" required />
                 <label htmlFor="street">Street Address:</label>
 
                 <div className={dedicated.whole}>
@@ -150,6 +148,7 @@ const Register = () => {
                       value={value}
                       onChange={handleInput}
                       disabled={!ready}
+                      required
                     />
                   </div>
                   {/* We can use the "status" to decide whether we should display the dropdown or not */}
@@ -160,8 +159,10 @@ const Register = () => {
                   )}
                 </div>
 
-                <label htmlFor="tel">Phone Number:</label>
-                <input id="tel" type="tel" />
+                <label htmlFor="tel" required>
+                  Phone Number:
+                </label>
+                <input id="tel" type="tel" required />
 
                 {/* <label htmlFor="street">Street Address:</label>
                 <input id="street" type="text" />
@@ -171,7 +172,7 @@ const Register = () => {
                 <input id="zip" name="zip" type="text" pattern="[0-9]*" /> */}
               </div>
               <div className={styles.col2}>
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email ">Email:</label>
                 <input type="email" id="email" required />
                 <label htmlFor="password">Password:</label>
                 <input
