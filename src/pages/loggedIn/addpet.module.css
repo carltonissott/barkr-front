@@ -103,7 +103,27 @@
 
 @media only screen and (max-width: 768px) {
   .flex h1 {
-    padding: 1rem;
+    width: 90%;
     text-align: center;
+  }
+
+  .flex input{
+    margin: 1rem 0;
+    max-width: 100%;
+    padding: 1em;
+  }
+
+  .radio{
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  .textarea{
+    max-width: 80%;
+    padding: 0;
+  }
+
+  .flex h1{
+    font-size: 2rem;
   }
 }

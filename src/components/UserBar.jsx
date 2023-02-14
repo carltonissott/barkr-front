@@ -19,28 +19,38 @@ const UserBar = () => {
     setShowProfile(false);
   };
 
+  const foundPetHandler = () => {
+    navigate("/foundpet");
+    setShowProfile(false);
+  };
+
   const logoutHandler = () => {
     //log out user
     localStorage.setItem("token", "");
     localStorage.setItem("userId", "");
     //redirect user to main page
     navigate("/");
+    setShowProfile(false);
   };
 
   const myPetsHandler = () => {
     setShowProfile(false);
     navigate("/dashboard");
+    setShowProfile(false);
   };
 
   const loginHandler = () => {
     navigate("/login");
+    setShowProfile(false);
   };
   const myAccountHandler = () => {
     navigate("/dashboard/myprofile"); //navigate to my profile
+    setShowProfile(false);
   };
 
   const addPetHandler = () => {
     navigate("/dashboard/add-pet");
+    setShowProfile(false);
   };
 
   return (
@@ -135,7 +145,7 @@ const UserBar = () => {
             localStorage.getItem("expiration") < Date.now() ? (
               <ul className="ul">
                 <li onClick={addPetHandler}>Register Pet</li>
-                <li>Found Pet</li>
+                <li onClick={foundPetHandler}>Found Pet</li>
                 <div class="hr" />
                 <li onClick={loginHandler}>Sign In</li>
               </ul>
@@ -146,7 +156,9 @@ const UserBar = () => {
                 <div class="hr" />
                 <li onClick={addPetHandler}>Register Pet</li>
                 <li>Found Pet</li>
-                <button class="signout"onClick={logoutHandler}>Sign Out</button>
+                <button class="signout" onClick={logoutHandler}>
+                  Sign Out
+                </button>
               </ul>
             )}
             <FontAwesomeIcon onClick={hideProfileHandler} icon={faClose} />

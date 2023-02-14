@@ -84,11 +84,11 @@ form label {
 @media only screen and (max-width: 768px) {
 .form{
   flex-direction: column;
-  margin: 3rem 3rem 0 3rem;
+  margin: 1rem;
 }
 
 form h1{
-  margin: 3.5rem ;
+  margin: 3rem ;
 }
 
 .button{

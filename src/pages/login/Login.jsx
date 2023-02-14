@@ -74,16 +74,17 @@ const Login = (props) => {
 
   return (
     <Background>
-      <div className={loginPage.signintext}>
-        <FontAwesomeIcon icon={faDog} className={loginPage.icon} />
-        <h2>Sign in to your account</h2>
-        <p>
-          Or <a onClick={navigateHandler}>sign up for your free account.</a>{" "}
-        </p>
-        <div className={loginPage.loginDiv}>
-          {isLoading ? (
-            <Loading />
-          ) : (
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className={loginPage.signintext}>
+          <FontAwesomeIcon icon={faDog} className={loginPage.icon} />
+          <h2>Sign in to your account</h2>
+          <p>
+            Or <a onClick={navigateHandler}>sign up for your free account.</a>{" "}
+          </p>
+
+          <div className={loginPage.loginDiv}>
             <form className={loginPage.loginForm} onSubmit={loginHandler}>
               <label htmlFor="email">Email address</label>
               <input type="email" id="email" />
@@ -93,9 +94,9 @@ const Login = (props) => {
                 Login
               </button>
             </form>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </Background>
   );
 };
