@@ -155,7 +155,7 @@ const UserBar = () => {
                 <li onClick={myPetsHandler}>My Pets</li>
                 <div class="hr" />
                 <li onClick={addPetHandler}>Register Pet</li>
-                <li>Found Pet</li>
+                <li onClick={foundPetHandler}>Found Pet</li>
                 <button class="signout" onClick={logoutHandler}>
                   Sign Out
                 </button>

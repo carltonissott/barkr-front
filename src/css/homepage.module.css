@@ -27,3 +27,13 @@
   background-color: #f4a261;
   transform: translateY(-20px);
 }
+
+@media only screen and (max-width: 768px) {
+.button{
+  font-size: 2rem;
+
+}
+.link{
+  margin: 1.5rem;
+}
+}
