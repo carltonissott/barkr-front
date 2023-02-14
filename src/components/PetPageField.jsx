@@ -10,6 +10,8 @@ const PetPageField = (prop) => {
     setIsEditing(true);
   };
 
+
+
   const updatePetHandler = async (e) => {
     const desiredField = e.target[0].id; //takes id to know what to mutate
     e.preventDefault();

@@ -3,24 +3,90 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3rem;
+  margin: 1rem 3rem;
 }
 
-.link{
+.title {
+  font-size: 2.5rem;
+  color: #eb3204;
+  margin: 0 1rem;
+  padding: 0.5rem;
+  color: rgba(0, 0, 0, 0.822);
+}
+
+.svg {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  position: relative;
+  height: 100vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 99vw;
+}
+
+.containernew {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  background-color: white;
+  height: 100%;
+}
+
+.welcome {
+  text-align: center;
+}
+
+.svg img {
+  width: 80%;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 2rem;
+  color: rgba(85, 85, 85, 0.836);
+}
+
+.subtitle a {
+  color: #e76f51;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.link {
   width: 100%;
-  margin: 3rem;
+  margin: 1rem;
+  text-decoration: none;
+}
+.button svg {
+  margin-right: 0.6rem;
+  color: hsl(12, 76%, 92%);
 }
 
 .button {
-  font-size: 3rem;
+  font-size: 1.1rem;
   width: 100%;
   border: 0;
-  padding: 0.5em;
-  border-radius: 20px;
+  padding: 0.8rem 4rem;
+  border-radius: 0.5rem;
   background-color: #e76f51;
-  color: white;
+  color: hsl(12, 76%, 98%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: transform 0.3s;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .button:hover {
@@ -29,11 +95,28 @@
 }
 
 @media only screen and (max-width: 768px) {
-.button{
-  font-size: 2rem;
+  .main {
+    flex-direction: column;
+    padding-top: 10vh;
+  }
+  .button {
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+  }
 
-}
-.link{
-  margin: 1.5rem;
-}
+  .button svg {
+    font-size: 1rem;
+
+  }
+
+  .link {
+    margin: 0.8rem 1.5rem;
+  }
+  .svg {
+    width: 100%;
+    margin: 2rem;
+  }
+  .containernew {
+    width: 100%;
+  }
 }
